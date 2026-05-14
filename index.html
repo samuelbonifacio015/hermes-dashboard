@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sem6 · dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: #111118;
+    --bg-card-hover: #16161f;
+    --border: #1a1a2e;
+    --text: #e0e0f0;
+    --text-dim: #6b6b8a;
+    --accent: #4f8cff;
+    --accent-glow: rgba(79, 140, 255, 0.15);
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --purple: #a78bfa;
+    --cyan: #22d3ee;
+    --orange: #fb923c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Header */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 32px;
+    background: linear-gradient(180deg, #0d0d1a 0%, var(--bg) 100%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .logo .badge {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--accent-glow);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(79, 140, 255, 0.3);
+    -webkit-text-fill-color: var(--accent);
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .header-stats span strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .update-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  /* Container */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px 64px;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(79, 140, 255, 0.2);
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-value {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* Stat cards sizing */
+  .stat-total { grid-column: span 3; }
+  .stat-week { grid-column: span 3; }
+  .stat-projects { grid-column: span 3; }
+  .stat-courses { grid-column: span 3; }
+
+  /* Week section */
+  .week-section { grid-column: span 12; }
+
+  .week-grid {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .day-card {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .day-card.today {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .day-name {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  .day-icons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .day-icons .icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .icon.done {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--green);
+  }
+
+  .icon.missed {
+    background: rgba(248, 113, 113, 0.1);
+    color: var(--red);
+    opacity: 0.4;
+  }
+
+  /* Tasks */
+  .tasks-section { grid-column: span 8; }
+
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(26, 26, 46, 0.5);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .task-item:last-child { border-bottom: none; }
+
+  .task-check {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--green);
+  }
+
+  .task-project {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Projects sidebar */
+  .projects-section { grid-column: span 4; }
+
+  .project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(26, 26, 46, 0.5);
+  }
+
+  .project-item:last-child { border-bottom: none; }
+
+  .project-name {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .project-type {
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .project-notes {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  /* University */
+  .uni-section { grid-column: span 12; }
+  .uni-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px; }
+
+  .uni-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .uni-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .uni-status {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* Recent activity */
+  .activity-section { grid-column: span 12; }
+
+  .activity-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .activity-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 6px 10px;
+    background: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Vault structure */
+  .struct-section { grid-column: span 12; }
+
+  .struct-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .struct-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .struct-name {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .struct-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* Section title */
+  /* Deadline / Countdown */
+  .deadline-section { grid-column: span 12; }
+
+  .deadline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .deadline-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .deadline-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+  }
+
+  .deadline-card.urgent::before { background: var(--red); }
+  .deadline-card.warning::before { background: var(--yellow); }
+  .deadline-card.soon::before { background: var(--accent); }
+  .deadline-card.later::before { background: var(--text-dim); }
+
+  .deadline-card.urgent { border-left-color: var(--red); }
+  .deadline-card.warning { border-left-color: var(--yellow); }
+
+  .deadline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+
+  .deadline-course {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .deadline-weight {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: var(--bg-card);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .deadline-task {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .deadline-countdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .deadline-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .deadline-number.urgent { color: var(--red); }
+  .deadline-number.warning { color: var(--yellow); }
+  .deadline-number.soon { color: var(--accent); }
+  .deadline-number.later { color: var(--text-dim); }
+
+  .deadline-label {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .deadline-bar {
+    margin-top: 8px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border);
+    overflow: hidden;
+  }
+
+  .deadline-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  .deadline-bar-fill.urgent { background: var(--red); }
+  .deadline-bar-fill.warning { background: var(--yellow); }
+  .deadline-bar-fill.soon { background: var(--accent); }
+  .deadline-bar-fill.later { background: var(--text-dim); opacity: 0.4; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .empty-state {
+    font-size: 13px;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 24px;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .loading .spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .stat-total, .stat-week, .stat-projects, .stat-courses { grid-column: span 6; }
+    .tasks-section, .projects-section { grid-column: span 12; }
+    .uni-grid { grid-template-columns: repeat(2, 1fr); }
+    .header-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+  }
+
+  @media (max-width: 600px) {
+    .stat-total, .stat-week, .stat-projects, .stat-courses { grid-column: span 12; }
+    .uni-grid { grid-template-columns: 1fr; }
+    .container { padding: 16px; }
+    .header { padding: 16px; }
+    .week-grid { flex-wrap: wrap; }
+    .day-card { min-width: 70px; }
+  }
+
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .card-value.accent { color: var(--accent); }
+  .card-value.green { color: var(--green); }
+  .card-value.purple { color: var(--purple); }
+  .card-value.orange { color: var(--orange); }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin: 0 auto;
+  }
+  .tab-btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .tab-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  .tab-btn.active {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── Syllabus / Semana 7 ── */
+  .syllabus-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .syllabus-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+  }
+  .syllabus-card:hover {
+    border-color: rgba(79, 140, 255, 0.2);
+  }
+  .syllabus-card.full { grid-column: 1 / -1; }
+  .syllabus-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .syllabus-card .code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .syllabus-card .meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 8px 0 12px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .syllabus-card .meta span {
+    background: var(--bg-card);
+    padding: 2px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .syllabus-card .label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    margin: 14px 0 4px;
+  }
+  .syllabus-card ul {
+    list-style: none;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .syllabus-card ul li::before {
+    content: '•';
+    color: var(--accent);
+    margin-right: 8px;
+  }
+  .syllabus-card .this-week {
+    background: rgba(79, 140, 255, 0.08);
+    border: 1px solid rgba(79, 140, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+  }
+  .syllabus-card .this-week .title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .syllabus-card .eval-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    background: rgba(52, 211, 153, 0.06);
+    border: 1px solid rgba(52, 211, 153, 0.15);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 8px 0;
+  }
+  .syllabus-card .upcoming-deadline {
+    color: var(--yellow);
+    font-weight: 600;
+  }
+  .syllabus-card .done-deadline {
+    color: var(--green);
+    font-weight: 600;
+  }
+  .syllabus-card .danger-deadline {
+    color: var(--red);
+    font-weight: 600;
+  }
+  @media (max-width: 800px) {
+    .syllabus-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <h1>sem6 · dashboard</h1>
+      <span class="badge">vault</span>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('overview', this)">📊 Overview</button>
+      <button class="tab-btn" onclick="switchTab('semana7', this)">📚 Semana 7</button>
+    </div>
+    <div class="header-stats" id="headerStats">
+      <span class="update-time" id="updateTime">⏳ cargando...</span>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="app">
+  <div class="loading">
+    <div class="spinner"></div>
+    <div>Escaneando el vault...</div>
+  </div>
+</div>
+
+<div class="container tab-content" id="tab-semana7">
+  <div class="loading"><div class="spinner"></div><div>Cargando plan calendario...</div></div>
+</div>
+
+<script>
+async function loadDashboard() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    render(d);
+  } catch (e) {
+    document.getElementById('app').innerHTML = `
+      <div class="empty-state">
+        ❌ Error cargando datos: ${e.message}<br>
+        <small>Ejecutá <code>./update.sh</code> primero para generar data.json</small>
+      </div>
+    `;
+  }
+}
+
+function render(d) {
+  const { 
+    total_notes, notes_by_area, vault_structure,
+    weekly_progress_current, weekly_progress_prev,
+    today_tasks, projects, university, deadlines, recent_activity,
+    current_week, generated_at 
+  } = d;
+
+  const dayChecks = countDayChecks(weekly_progress_current);
+  const activeProjects = Object.keys(projects).length;
+  const coursesActive = Object.keys(university).length;
+
+  // Update header
+  document.getElementById('headerStats').innerHTML = `
+    <span><strong>📝 ${total_notes}</strong> notas</span>
+    <span><strong>📁</strong> ${vault_structure.length} carpetas</span>
+    <span class="update-time">⏱ ${formatTime(generated_at)}</span>
+  `;
+
+  const app = document.getElementById('app');
+  
+  app.innerHTML = `
+    <!-- Stats row -->
+    <div class="grid">
+      <div class="card stat-total fade-in">
+        <div class="card-title">📝 Total Notas</div>
+        <div class="card-value accent">${total_notes}</div>
+        <div class="card-sub">en todo el vault</div>
+      </div>
+      <div class="card stat-week fade-in" style="animation-delay: 0.05s">
+        <div class="card-title">📅 Semana ${current_week || '?'}</div>
+        <div class="card-value green">${dayChecks.done}</div>
+        <div class="card-sub">de ${dayChecks.total} días completados</div>
+      </div>
+      <div class="card stat-projects fade-in" style="animation-delay: 0.1s">
+        <div class="card-title">🚀 Proyectos</div>
+        <div class="card-value purple">${activeProjects}</div>
+        <div class="card-sub">activos en el vault</div>
+      </div>
+      <div class="card stat-courses fade-in" style="animation-delay: 0.15s">
+        <div class="card-title">🎓 Cursos</div>
+        <div class="card-value orange">${coursesActive}</div>
+        <div class="card-sub">en seguimiento</div>
+      </div>
+    </div>
+
+    <!-- University section -->
+    <div class="grid">
+      <div class="card uni-section fade-in" style="animation-delay: 0.2s">
+        <div class="section-title">🎓 Universidad</div>
+        <div class="uni-grid">
+          ${renderUni(university)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Countdown deadlines section -->
+    ${deadlines && deadlines.length > 0 ? `
+    <div class="grid">
+      <div class="card deadline-section fade-in" style="animation-delay: 0.22s">
+        <div class="section-title">⏰ Countdown de Entregas</div>
+        <div class="deadline-grid">
+          ${renderDeadlines(deadlines)}
+        </div>
+      </div>
+    </div>` : ''}
+
+    <!-- Week section -->
+    <div class="grid">
+      <div class="card week-section fade-in" style="animation-delay: 0.25s">
+        <div class="card-title">📅 ${weekly_progress_current.label}</div>
+        <div class="week-grid">
+          ${renderWeek(weekly_progress_current)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tasks + Projects row -->
+    <div class="grid">
+      <div class="card tasks-section fade-in" style="animation-delay: 0.3s">
+        <div class="card-title">📋 Tareas de hoy · ${capitalize(today_tasks?.day || '—')}</div>
+        ${renderTasks(today_tasks)}
+      </div>
+      <div class="card projects-section fade-in" style="animation-delay: 0.35s">
+        <div class="card-title">🚀 Proyectos</div>
+        ${renderProjects(projects)}
+      </div>
+    </div>
+
+    <!-- Vault structure -->
+    <div class="grid">
+      <div class="card struct-section fade-in" style="animation-delay: 0.4s">
+        <div class="card-title">📁 Estructura del Vault</div>
+        <div class="struct-grid">
+          ${renderStructure(vault_structure)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent activity -->
+    ${recent_activity && recent_activity.length > 0 ? `
+    <div class="grid">
+      <div class="card activity-section fade-in" style="animation-delay: 0.45s">
+        <div class="card-title">🔄 Actividad Reciente (3 días)</div>
+        <div class="activity-list">
+          ${recent_activity.map(f => 
+            `<div class="activity-item">${escapeHtml(f.path)}</div>`
+          ).join('')}
+        </div>
+      </div>
+    </div>` : ''}
+  `;
+}
+
+function capitalize(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
+}
+
+function countDayChecks(week) {
+  const days = Object.values(week.days || {});
+  const done = days.filter(d => d.checkin).length;
+  return { done, total: days.length };
+}
+
+function renderWeek(week) {
+  const dayOrder = ['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];
+  const today = new Date().getDay();
+  const dayMap = {1:'lunes',2:'martes',3:'miercoles',4:'jueves',5:'viernes',6:'sabado',0:'domingo'};
+  const todayName = dayMap[today];
+  
+  return dayOrder.map(d => {
+    const info = week.days[d];
+    const isToday = d === todayName;
+    const icons = info ? `
+      <span class="icon ${info.checkin ? 'done' : 'missed'}">✓</span>
+      <span class="icon ${info.todolist ? 'done' : 'missed'}">☰</span>
+      <span class="icon ${info.summary ? 'done' : 'missed'}">Σ</span>
+    ` : `<span class="icon missed" style="width:100%">—</span>`;
+    
+    return `
+      <div class="day-card ${isToday ? 'today' : ''}">
+        <div class="day-name">${capitalize(d)}</div>
+        <div class="day-icons">${icons}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderTasks(tasks) {
+  if (!tasks || !tasks.tasks || tasks.tasks.length === 0) {
+    return `<div class="empty-state">✅ No hay tareas para hoy</div>`;
+  }
+  return tasks.tasks.map(t => {
+    const project = extractProject(t.task);
+    return `
+      <div class="task-item">
+        <div class="task-check">${t.done ? '✓' : ''}</div>
+        <div>
+          ${project ? `<div class="task-project">${project}</div>` : ''}
+          ${escapeHtml(t.task.replace(/\[\[(.*?)\]\]/g, '$1'))}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function extractProject(task) {
+  const match = task.match(/\[\[(.*?)\]\]/);
+  if (match) return match[1].split(/[—–-]/)[0].trim();
+  return null;
+}
+
+function renderProjects(projects) {
+  const entries = Object.entries(projects);
+  if (entries.length === 0) return `<div class="empty-state">Sin proyectos registrados</div>`;
+  return entries.map(([name, info]) => `
+    <div class="project-item">
+      <div>
+        <div class="project-name">${name}</div>
+        <div class="project-type">${info.type}</div>
+      </div>
+      <div class="project-notes">${info.notes} notas</div>
+    </div>
+  `).join('');
+}
+
+function renderUni(uni) {
+  const entries = Object.entries(uni);
+  if (entries.length === 0) return `<div class="empty-state">Sin datos</div>`;
+  return entries.map(([name, info]) => `
+    <div class="uni-card">
+      <div class="uni-name">${name}</div>
+      <div class="uni-status">${info.status}</div>
+    </div>
+  `).join('');
+}
+
+function deadlineCssClass(status) {
+  const map = {
+    'hoy': 'urgent',
+    'urgente': 'urgent',
+    'vencido': 'urgent',
+    'muy_proximo': 'warning',
+    'proximo': 'soon',
+    'lejano': 'later',
+    'desconocido': 'later'
+  };
+  return map[status] || 'later';
+}
+
+function renderDeadlines(deadlines) {
+  if (!deadlines || deadlines.length === 0) return `<div class="empty-state">🎉 Sin entregas pendientes</div>`;
+  return deadlines.map(d => {
+    const cssClass = deadlineCssClass(d.status);
+    const maxDays = 30;
+    const pct = Math.max(2, Math.min(100, Math.round((1 - d.dias_restantes / maxDays) * 100)));
+    const barPct = d.dias_restantes < 0 ? 100 : (d.dias_restantes > maxDays ? 5 : 100 - pct);
+    
+    return `
+      <div class="deadline-card ${cssClass}">
+        <div class="deadline-header">
+          <span class="deadline-course">${d.curso}</span>
+          <span class="deadline-weight">${d.peso}</span>
+        </div>
+        <div class="deadline-task">${d.tarea}</div>
+        <div class="deadline-countdown">
+          <span class="deadline-number ${cssClass}">${d.dias_restantes <= 0 ? '!!' : d.dias_restantes}</span>
+          <div>
+            <div class="deadline-label">${d.label}</div>
+            <div class="deadline-label" style="font-size:11px">${d.tipo} · ${d.fecha}</div>
+          </div>
+        </div>
+        <div class="deadline-bar">
+          <div class="deadline-bar-fill ${cssClass}" style="width: ${barPct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderStructure(structure) {
+  if (!structure || structure.length === 0) return `<div class="empty-state">Sin datos</div>`;
+  return structure.map(s => `
+    <div class="struct-item">
+      <span class="struct-name">${s.name}</span>
+      <span class="struct-count">${s.notes}</span>
+    </div>
+  `).join('');
+}
+
+function formatTime(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString('es-PE', { 
+      hour: '2-digit', minute: '2-digit',
+      day: 'numeric', month: 'short'
+    });
+  } catch { return iso; }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Tab switching
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const tab = document.getElementById('tab-' + name);
+  tab.classList.add('active');
+  // Render Semana 7 tab on first visit
+  if (name === 'semana7' && !tab.dataset.rendered) {
+    tab.dataset.rendered = '1';
+    tab.innerHTML = renderSemana7();
+  }
+}
+
+// ── Syllabus Data ──
+
+const SYLLABUS = {
+  calculo: {
+    name: 'Cálculo II',
+    code: '1AMA0263',
+    credits: 6,
+    hours: '6h/sem (4h teoría + 2h práctica)',
+    prof: 'Joel Rojas (coord.)',
+    color: '#22d3ee',
+    weeks: 16,
+    currentWeek: 7,
+    weekRange: '11 MAY – 16 MAY',
+    thisWeek: 'Integrales triples en coordenadas rectangulares. Actividad colaborativa AAA2. Evaluación del AAA2 (hasta lun 18 may).',
+    units: [
+      { name: 'Unidad 1: Geometría del espacio', weeks: '1-5', evals: 'EU1 ✅ (sem 5)' },
+      { name: 'Unidad 2: Integrales dobles y triples', weeks: '6-10', evals: 'CV2 esta sem · EU2 (sem 10)' },
+      { name: 'Unidad 3: Cálculo vectorial', weeks: '11-16', evals: 'CV3 · EU3 · TF' },
+    ],
+    evalFormula: 'DD2 = 15% ACT2 + 15% CV2 + 70% EU2',
+    evalDetail: 'ACT2 = GNP2 + PEC2 + EAAA2 + APC2 + AAD2 (AAD2: participación semanas 6 y 7)',
+    finalFormula: 'PF = 0.15×DD1 + 0.25×DD2 + 0.30×DD3 + 0.30×ZB',
+    nextDeadline: { name: 'CV2 (Control Virtual 2)', date: 'Semana 7', weight: '15% de DD2', urgent: false },
+  },
+  estadistica: {
+    name: 'Estadística Aplicada',
+    code: '1AMA0741',
+    credits: 4,
+    hours: '4h/sem (3h sesión + 1h AAD)',
+    prof: '—',
+    color: '#fbbf24',
+    weeks: 16,
+    currentWeek: 7,
+    weekRange: '11 MAY – 17 MAY',
+    thisWeek: 'Primer avance del trabajo (debía entregarse lun 11 Mayo). Variable aleatoria discreta. Probabilidad condicional, total y teorema de Bayes.',
+    units: [
+      { name: 'DD1: Estadística descriptiva', weeks: '1-5', evals: 'Eval 1 ✅ (sem 5) · Tareas 1-4' },
+      { name: 'DD2: Probabilidad y muestreo', weeks: '6-14', evals: 'Eval 2 (sem 12) · Tareas 5-11' },
+      { name: 'ZB: Trabajo Final', weeks: '14-16', evals: 'Entrega + Sustentación' },
+    ],
+    evalFormula: 'DD1 = 25% Eval 1 + 10% Prom Tareas 1-4',
+    evalDetail: 'DD2 = 25% Eval 2 + 10% Prom Tareas 5-11 · ZB = 15% Entrega + 25% Sustentación',
+    finalFormula: 'PF = 30% DD1 + 30% DD2 + 40% ZB',
+    nextDeadline: { name: 'Primer avance del trabajo', date: '11 MAY (vencido ⚠️)', weight: '—', urgent: true },
+  },
+  so: {
+    name: 'Sistemas Operativos',
+    code: '1ASI0726',
+    credits: 4,
+    hours: '4h/sem',
+    prof: 'Robert Zubieta Cardenas',
+    color: '#a78bfa',
+    weeks: 16,
+    currentWeek: 7,
+    weekRange: '11 MAY – 17 MAY',
+    thisWeek: 'Unidad 2: Estructura y Fundamentos (sem 4-8). TB1 entregado ✅. Preparar EA1 (sem 8).',
+    units: [
+      { name: 'Unidad 1: Overview', weeks: '1-3', evals: 'PC1 ✅' },
+      { name: 'Unidad 2: Estructura y Fundamentos', weeks: '4-8', evals: 'PC2 ✅ · TB1 ✅ · EA1 (sem 8)' },
+      { name: 'Unidad 3: Administración', weeks: '9-12', evals: 'PC3 (sem 9-12)' },
+      { name: 'Unidad 4: SO Principales', weeks: '13-14', evals: 'PC4' },
+      { name: 'Unidad 5: Outcome ABET 6', weeks: '15-16', evals: 'DD1 · EB1 · TB2' },
+    ],
+    evalFormula: 'NF = 0.10 PC1 + 0.10 PC2 + 0.05 TB1 + 0.10 EA1 + 0.10 PC3 + 0.10 PC4 + 0.15 DD1 + 0.15 TB2 + 0.15 EB1',
+    evalDetail: 'TB1 = 5% ✅ ya entregado',
+    finalFormula: 'NF = 0.10 PC1 + 0.10 PC2 + 0.05 TB1 + 0.10 EA1 + 0.10 PC3 + 0.10 PC4 + 0.15 DD1 + 0.15 TB2 + 0.15 EB1',
+    nextDeadline: { name: 'EA1 — Evaluación Parcial', date: '24 MAY (sem 8)', weight: '10%', urgent: false },
+  },
+  appsMoviles: {
+    name: 'Aplicaciones Móviles',
+    code: '1ACC0238',
+    credits: 4,
+    hours: '4h/sem',
+    prof: 'Eduardo Martin Reyes Rodriguez',
+    color: '#34d399',
+    weeks: 16,
+    currentWeek: 7,
+    weekRange: '11 MAY – 17 MAY',
+    thisWeek: 'Unidad 2: Native Mobile Development (sem 3-8). TB1 en progreso (~70%). Deploy backend Klippr pendiente.',
+    units: [
+      { name: 'Unidad 1: Overview', weeks: '1-2', evals: 'PC1' },
+      { name: 'Unidad 2: Native Mobile Development', weeks: '3-8', evals: 'TB1 entrega esta sem · EA Parcial 1' },
+      { name: 'Unidad 3: Cross-Platform (Flutter)', weeks: '9-12', evals: 'PC2' },
+      { name: 'Unidad 4: iOS + Complementarios', weeks: '13-16', evals: 'DD1 · EF1 · TB2' },
+    ],
+    evalFormula: 'PC1 + TB1 + EA Parcial + PC2 + DD1 + EF1 + TB2',
+    evalDetail: 'Evaluaciones: PC1 (sem 1-2), TB1 (sem 3-8), EA Parcial, PC2 (sem 9-12), DD1, EF1, TB2',
+    finalFormula: 'Evaluación por competencias (Pensamiento Innovador N2 + ABET 7 N2)',
+    nextDeadline: { name: 'TB1 — Trabajo 1 (entrega)', date: '17 MAY (domingo)', weight: '—', urgent: true },
+  },
+};
+
+// ── Semana 7 Renderer ──
+
+function renderSemana7() {
+  const s = SYLLABUS;
+  return `
+    <div class="grid">
+      <div class="card week-section" style="margin-bottom:0">
+        <div class="card-title">📚 Plan Calendario · Semana 7 (11-17 MAY 2026)</div>
+        <div style="font-size:13px; color:var(--text-dim); margin-top:4px">
+          Resumen de sílabos, evaluaciones y deadlines para la semana actual
+        </div>
+      </div>
+    </div>
+
+    <div class="syllabus-grid" style="margin-top:16px">
+      ${renderSyllabusCard(s.calculo)}
+      ${renderSyllabusCard(s.estadistica)}
+      ${renderSyllabusCard(s.so)}
+      ${renderSyllabusCard(s.appsMoviles)}
+    </div>
+  `;
+}
+
+function renderSyllabusCard(course) {
+  const isDanger = course.nextDeadline.urgent && course.nextDeadline.date.includes('vencido');
+  const deadlineClass = course.nextDeadline.urgent
+    ? (isDanger ? 'danger-deadline' : 'upcoming-deadline')
+    : '';
+
+  return `
+    <div class="syllabus-card">
+      <h3 style="color:${course.color}">${course.name}</h3>
+      <div class="code">${course.code} · ${course.credits} créditos</div>
+      <div class="meta">
+        <span>🕐 ${course.hours}</span>
+        <span>📅 ${course.weeks} semanas</span>
+        <span>👨‍🏫 ${course.prof}</span>
+      </div>
+
+      <div class="this-week">
+        <div class="title">📌 Esta semana (${course.weekRange})</div>
+        <div style="font-size:13px; line-height:1.6">${course.thisWeek}</div>
+      </div>
+
+      <div class="label">📋 Unidades</div>
+      <ul>
+        ${course.units.map(u => `<li>${u.name} <span style="color:var(--text-dim)">(${u.weeks})</span> — ${u.evals}</li>`).join('')}
+      </ul>
+
+      <div class="label">📐 Evaluación</div>
+      <div class="eval-formula">${course.evalFormula}</div>
+      ${course.evalDetail ? `<div style="font-size:12px; color:var(--text-dim); margin:4px 0 8px">${course.evalDetail}</div>` : ''}
+
+      <div class="label">🎯 Próximo vencimiento</div>
+      <div class="${deadlineClass}" style="font-size:14px">
+        ${course.nextDeadline.urgent ? '⚠️ ' : '📌 '}${course.nextDeadline.name} — ${course.nextDeadline.date} ${course.nextDeadline.weight ? '· ' + course.nextDeadline.weight : ''}
+      </div>
+    </div>
+  `;
+}
+
+// Load
+loadDashboard();
+</script>
+</body>
+</html>
