@@ -1,0 +1,235 @@
+{
+  "generated_at": "2026-05-14T14:00:11.214376",
+  "total_notes": 204,
+  "notes_by_area": {
+    "2026": 172,
+    "Universidad": 24,
+    "Excalidraw": 1
+  },
+  "vault_structure": [
+    {
+      "name": "2026",
+      "notes": 172
+    },
+    {
+      "name": "Excalidraw",
+      "notes": 1
+    },
+    {
+      "name": "MYS",
+      "notes": 3
+    },
+    {
+      "name": "Universidad",
+      "notes": 24
+    }
+  ],
+  "weekly_progress_current": {
+    "label": "Semana 7 (11 May - 17 May)",
+    "days": {
+      "jueves": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "lunes": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "martes": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "miercoles": {
+        "checkin": false,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      }
+    }
+  },
+  "weekly_progress_prev": {
+    "label": "Semana 6 (4 May - 10 May)",
+    "days": {
+      "domingo": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "jueves": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "lunes": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": true
+      },
+      "martes": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": true
+      },
+      "miercoles": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": true
+      },
+      "sabado": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "viernes": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      }
+    }
+  },
+  "current_week": 7,
+  "today_tasks": {
+    "day": "jueves",
+    "date": "2026-05-14",
+    "tasks": [
+      {
+        "task": "[[Estadistica Aplicada - EU1]] - Representación de variables **(Tipos, Variable, Escala de Medición, etc)**",
+        "done": true
+      },
+      {
+        "task": "[[Estadistica Aplicada - EU1]] - C.V (**Coeficiente de Variación**), etc.",
+        "done": true
+      },
+      {
+        "task": "[[MaquinariasJyS]] - Responsive de Frontend",
+        "done": true
+      },
+      {
+        "task": "[[Estadistica Aplicada - EU1]] - Representación de variables **(Tipos, Variable, Escala de Medición, etc)**",
+        "done": true
+      },
+      {
+        "task": "[[Estadistica Aplicada - EU1]] - C.V (**Coeficiente de Variación**), etc.",
+        "done": true
+      },
+      {
+        "task": "[Estadistica Aplicada - EU1] - Exámen de Simulación",
+        "done": true
+      }
+    ]
+  },
+  "projects": {
+    "MaquinariasJyS": {
+      "notes": 7,
+      "type": "🚧 Prioridad #1"
+    },
+    "QRust / Klippr": {
+      "notes": 6,
+      "type": "🎯 En desarrollo"
+    },
+    "WeTech / La AgencIA": {
+      "notes": 2,
+      "type": "🌱 Semilla"
+    }
+  },
+  "university": {
+    "Cálculo II": {
+      "status": "EU1 completado, EU2 pendiente"
+    },
+    "Sistemas Operativos": {
+      "status": "PC2 entregado, TB1 en progreso"
+    },
+    "Estadística Aplicada": {
+      "status": "EU1 examen completado, DD1 pendiente"
+    },
+    "Aplicaciones Móviles": {
+      "status": "Entrega próxima semana"
+    }
+  },
+  "deadlines": [
+    {
+      "curso": "Estadística Aplicada",
+      "tarea": "DD1 — Fin evaluación",
+      "fecha": "2026-05-10",
+      "tipo": "🔴 Entrega",
+      "peso": "15%",
+      "dias_restantes": -4,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
+    },
+    {
+      "curso": "Estadística Aplicada",
+      "tarea": "Primer avance del Trabajo",
+      "fecha": "2026-05-11",
+      "tipo": "📄 Avance",
+      "peso": "—",
+      "dias_restantes": -3,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
+    },
+    {
+      "curso": "Sistemas Operativos",
+      "tarea": "TB1 — Trabajo 1",
+      "fecha": "2026-05-17",
+      "tipo": "📄 Trabajo",
+      "peso": "5%",
+      "dias_restantes": 3,
+      "status": "muy_proximo",
+      "label": "🟡 En 3 días"
+    },
+    {
+      "curso": "Aplicaciones Móviles",
+      "tarea": "TB1 — Trabajo 1",
+      "fecha": "2026-05-17",
+      "tipo": "📄 Trabajo",
+      "peso": "15%",
+      "dias_restantes": 3,
+      "status": "muy_proximo",
+      "label": "🟡 En 3 días"
+    },
+    {
+      "curso": "Sistemas Operativos",
+      "tarea": "EA1 — Evaluación Parcial",
+      "fecha": "2026-05-24",
+      "tipo": "📝 Examen",
+      "peso": "10%",
+      "dias_restantes": 10,
+      "status": "lejano",
+      "label": "📌 En 10 días"
+    },
+    {
+      "curso": "Aplicaciones Móviles",
+      "tarea": "EA1 — Evaluación Parcial",
+      "fecha": "2026-05-24",
+      "tipo": "📝 Examen",
+      "peso": "15%",
+      "dias_restantes": 10,
+      "status": "lejano",
+      "label": "📌 En 10 días"
+    },
+    {
+      "curso": "Cálculo II",
+      "tarea": "DD2 / EU2 — Evaluación Unidad 2",
+      "fecha": "2026-05-24",
+      "tipo": "📝 Examen",
+      "peso": "25%",
+      "dias_restantes": 10,
+      "status": "lejano",
+      "label": "📌 En 10 días"
+    }
+  ],
+  "recent_activity": []
+}
