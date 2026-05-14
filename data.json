@@ -1,15 +1,16 @@
 {
-  "generated_at": "2026-05-14T14:00:11.214376",
-  "total_notes": 204,
+  "generated_at": "2026-05-14T15:57:09.159119",
+  "total_notes": 205,
   "notes_by_area": {
-    "2026": 172,
+    "2026": 173,
     "Universidad": 24,
-    "Excalidraw": 1
+    "Excalidraw": 1,
+    "(otros)": 7
   },
   "vault_structure": [
     {
       "name": "2026",
-      "notes": 172
+      "notes": 173
     },
     {
       "name": "Excalidraw",
@@ -27,12 +28,6 @@
   "weekly_progress_current": {
     "label": "Semana 7 (11 May - 17 May)",
     "days": {
-      "jueves": {
-        "checkin": false,
-        "todolist": true,
-        "summary": false,
-        "todoreviewer": false
-      },
       "lunes": {
         "checkin": true,
         "todolist": true,
@@ -49,6 +44,30 @@
         "checkin": false,
         "todolist": true,
         "summary": true,
+        "todoreviewer": false
+      },
+      "jueves": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "viernes": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "sabado": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "domingo": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
         "todoreviewer": false
       }
     }
@@ -56,18 +75,6 @@
   "weekly_progress_prev": {
     "label": "Semana 6 (4 May - 10 May)",
     "days": {
-      "domingo": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": false
-      },
-      "jueves": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": false
-      },
       "lunes": {
         "checkin": true,
         "todolist": true,
@@ -86,13 +93,25 @@
         "summary": true,
         "todoreviewer": true
       },
-      "sabado": {
+      "jueves": {
         "checkin": true,
         "todolist": true,
         "summary": true,
         "todoreviewer": false
       },
       "viernes": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "sabado": {
+        "checkin": true,
+        "todolist": true,
+        "summary": true,
+        "todoreviewer": false
+      },
+      "domingo": {
         "checkin": true,
         "todolist": true,
         "summary": true,
@@ -118,14 +137,6 @@
         "done": true
       },
       {
-        "task": "[[Estadistica Aplicada - EU1]] - Representación de variables **(Tipos, Variable, Escala de Medición, etc)**",
-        "done": true
-      },
-      {
-        "task": "[[Estadistica Aplicada - EU1]] - C.V (**Coeficiente de Variación**), etc.",
-        "done": true
-      },
-      {
         "task": "[Estadistica Aplicada - EU1] - Exámen de Simulación",
         "done": true
       }
@@ -141,7 +152,7 @@
       "type": "🎯 En desarrollo"
     },
     "WeTech / La AgencIA": {
-      "notes": 2,
+      "notes": 3,
       "type": "🌱 Semilla"
     }
   },
@@ -231,5 +242,174 @@
       "label": "📌 En 10 días"
     }
   ],
-  "recent_activity": []
+  "recent_activity": [],
+  "syllabus": {
+    "calculo": {
+      "name": "Cálculo II",
+      "code": "1AMA0263",
+      "credits": 6,
+      "hours": "6h/sem (4h teoría + 2h práctica)",
+      "prof": "Joel Rojas (coord.)",
+      "color": "#22d3ee",
+      "weeks": 16,
+      "currentWeek": 7,
+      "weekRange": "11 MAY – 16 MAY",
+      "thisWeek": "Integrales triples en coordenadas rectangulares. Actividad colaborativa AAA2. Evaluación del AAA2 (hasta lun 18 may).",
+      "units": [
+        {
+          "name": "Unidad 1: Geometría del espacio",
+          "weeks": "1-5",
+          "evals": "EU1 ✅ (sem 5)"
+        },
+        {
+          "name": "Unidad 2: Integrales dobles y triples",
+          "weeks": "6-10",
+          "evals": "CV2 esta sem · EU2 (sem 10)"
+        },
+        {
+          "name": "Unidad 3: Cálculo vectorial",
+          "weeks": "11-16",
+          "evals": "CV3 · EU3 · TF"
+        }
+      ],
+      "evalFormula": "DD2 = 15% ACT2 + 15% CV2 + 70% EU2",
+      "evalDetail": "ACT2 = GNP2 + PEC2 + EAAA2 + APC2 + AAD2 (AAD2: participación semanas 6 y 7)",
+      "finalFormula": "PF = 0.15×DD1 + 0.25×DD2 + 0.30×DD3 + 0.30×ZB",
+      "nextDeadline": {
+        "name": "CV2 (Control Virtual 2)",
+        "date": "Semana 7",
+        "weight": "15% de DD2",
+        "urgent": false
+      }
+    },
+    "estadistica": {
+      "name": "Estadística Aplicada",
+      "code": "1AMA0741",
+      "credits": 4,
+      "hours": "4h/sem (3h sesión + 1h AAD)",
+      "prof": "—",
+      "color": "#fbbf24",
+      "weeks": 16,
+      "currentWeek": 7,
+      "weekRange": "11 MAY – 17 MAY",
+      "thisWeek": "Primer avance del trabajo (debía entregarse lun 11 Mayo). Variable aleatoria discreta. Probabilidad condicional, total y teorema de Bayes.",
+      "units": [
+        {
+          "name": "DD1: Estadística descriptiva",
+          "weeks": "1-5",
+          "evals": "Eval 1 ✅ (sem 5) · Tareas 1-4"
+        },
+        {
+          "name": "DD2: Probabilidad y muestreo",
+          "weeks": "6-14",
+          "evals": "Eval 2 (sem 12) · Tareas 5-11"
+        },
+        {
+          "name": "ZB: Trabajo Final",
+          "weeks": "14-16",
+          "evals": "Entrega + Sustentación"
+        }
+      ],
+      "evalFormula": "DD1 = 25% Eval 1 + 10% Prom Tareas 1-4",
+      "evalDetail": "DD2 = 25% Eval 2 + 10% Prom Tareas 5-11 · ZB = 15% Entrega + 25% Sustentación",
+      "finalFormula": "PF = 30% DD1 + 30% DD2 + 40% ZB",
+      "nextDeadline": {
+        "name": "Primer avance del trabajo",
+        "date": "11 MAY (vencido ⚠️)",
+        "weight": "—",
+        "urgent": true
+      }
+    },
+    "so": {
+      "name": "Sistemas Operativos",
+      "code": "1ASI0726",
+      "credits": 4,
+      "hours": "4h/sem",
+      "prof": "Robert Zubieta Cardenas",
+      "color": "#a78bfa",
+      "weeks": 16,
+      "currentWeek": 7,
+      "weekRange": "11 MAY – 17 MAY",
+      "thisWeek": "Unidad 2: Estructura y Fundamentos (sem 4-8). TB1 entregado ✅. Preparar EA1 (sem 8).",
+      "units": [
+        {
+          "name": "Unidad 1: Overview",
+          "weeks": "1-3",
+          "evals": "PC1 ✅"
+        },
+        {
+          "name": "Unidad 2: Estructura y Fundamentos",
+          "weeks": "4-8",
+          "evals": "PC2 ✅ · TB1 ✅ · EA1 (sem 8)"
+        },
+        {
+          "name": "Unidad 3: Administración",
+          "weeks": "9-12",
+          "evals": "PC3 (sem 9-12)"
+        },
+        {
+          "name": "Unidad 4: SO Principales",
+          "weeks": "13-14",
+          "evals": "PC4"
+        },
+        {
+          "name": "Unidad 5: Outcome ABET 6",
+          "weeks": "15-16",
+          "evals": "DD1 · EB1 · TB2"
+        }
+      ],
+      "evalFormula": "NF = 0.10 PC1 + 0.10 PC2 + 0.05 TB1 + 0.10 EA1 + 0.10 PC3 + 0.10 PC4 + 0.15 DD1 + 0.15 TB2 + 0.15 EB1",
+      "evalDetail": "TB1 = 5% ✅ ya entregado",
+      "finalFormula": "NF = 0.10 PC1 + 0.10 PC2 + 0.05 TB1 + 0.10 EA1 + 0.10 PC3 + 0.10 PC4 + 0.15 DD1 + 0.15 TB2 + 0.15 EB1",
+      "nextDeadline": {
+        "name": "EA1 — Evaluación Parcial",
+        "date": "24 MAY (sem 8)",
+        "weight": "10%",
+        "urgent": false
+      }
+    },
+    "appsMoviles": {
+      "name": "Aplicaciones Móviles",
+      "code": "1ACC0238",
+      "credits": 4,
+      "hours": "4h/sem",
+      "prof": "Eduardo Martin Reyes Rodriguez",
+      "color": "#34d399",
+      "weeks": 16,
+      "currentWeek": 7,
+      "weekRange": "11 MAY – 17 MAY",
+      "thisWeek": "Unidad 2: Native Mobile Development (sem 3-8). TB1 en progreso (~70%). Deploy backend Klippr pendiente.",
+      "units": [
+        {
+          "name": "Unidad 1: Overview",
+          "weeks": "1-2",
+          "evals": "PC1"
+        },
+        {
+          "name": "Unidad 2: Native Mobile Development",
+          "weeks": "3-8",
+          "evals": "TB1 entrega esta sem · EA Parcial 1"
+        },
+        {
+          "name": "Unidad 3: Cross-Platform (Flutter)",
+          "weeks": "9-12",
+          "evals": "PC2"
+        },
+        {
+          "name": "Unidad 4: iOS + Complementarios",
+          "weeks": "13-16",
+          "evals": "DD1 · EF1 · TB2"
+        }
+      ],
+      "evalFormula": "PC1 + TB1 + EA Parcial + PC2 + DD1 + EF1 + TB2",
+      "evalDetail": "Evaluaciones: PC1 (sem 1-2), TB1 (sem 3-8), EA Parcial, PC2 (sem 9-12), DD1, EF1, TB2",
+      "finalFormula": "Evaluación por competencias (Pensamiento Innovador N2 + ABET 7 N2)",
+      "nextDeadline": {
+        "name": "TB1 — Trabajo 1 (entrega)",
+        "date": "17 MAY (domingo)",
+        "weight": "—",
+        "urgent": true
+      }
+    }
+  }
 }

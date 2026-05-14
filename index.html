@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
 <title>sem6 · dashboard</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -95,6 +96,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--text-dim);
+    white-space: nowrap;
   }
 
   /* Container */
@@ -157,6 +159,26 @@
   .stat-projects { grid-column: span 3; }
   .stat-courses { grid-column: span 3; }
 
+  .stat-sparkline { grid-column: span 12; margin-bottom: 0; }
+
+  /* Sparkline */
+  .sparkline-wrap {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 60px;
+    margin-top: 8px;
+  }
+  .spark-bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
+  .spark-bars { display: flex; gap: 2px; align-items: flex-end; height: 40px; }
+  .spark-bar { width: 8px; border-radius: 3px 3px 0 0; min-height: 3px; transition: height 0.3s; }
+  .spark-bar.current { background: var(--accent); }
+  .spark-bar.prev { background: var(--text-dim); opacity: 0.4; }
+  .spark-label { font-size: 9px; color: var(--text-dim); margin-top: 4px; text-transform: uppercase; }
+  .spark-legend { display: flex; gap: 16px; font-size: 11px; color: var(--text-dim); margin-top: 8px; }
+  .spark-legend span { display: flex; align-items: center; gap: 4px; }
+  .spark-legend .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
   /* Week section */
   .week-section { grid-column: span 12; }
 
@@ -206,6 +228,7 @@
     justify-content: center;
     font-size: 10px;
     font-weight: 700;
+    cursor: help;
   }
 
   .icon.done {
@@ -230,9 +253,18 @@
     border-bottom: 1px solid rgba(26, 26, 46, 0.5);
     font-size: 13px;
     line-height: 1.5;
+    transition: opacity 0.2s;
   }
 
   .task-item:last-child { border-bottom: none; }
+
+  .task-item.done {
+    opacity: 0.5;
+  }
+  .task-item.done .task-text {
+    text-decoration: line-through;
+    color: var(--green);
+  }
 
   .task-check {
     width: 16px;
@@ -246,6 +278,11 @@
     justify-content: center;
     font-size: 9px;
     color: var(--green);
+  }
+
+  .task-item.done .task-check {
+    background: rgba(52, 211, 153, 0.15);
+    border-color: var(--green);
   }
 
   .task-project {
@@ -502,6 +539,29 @@
     padding: 24px;
   }
 
+  .error-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--red);
+    font-size: 14px;
+  }
+  .error-state .retry-btn {
+    margin-top: 16px;
+    background: var(--accent-glow);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .error-state .retry-btn:hover {
+    background: rgba(79, 140, 255, 0.25);
+  }
+
   .loading {
     text-align: center;
     padding: 80px 20px;
@@ -530,6 +590,7 @@
     .tasks-section, .projects-section { grid-column: span 12; }
     .uni-grid { grid-template-columns: repeat(2, 1fr); }
     .header-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .stat-sparkline { grid-column: span 12; }
   }
 
   @media (max-width: 600px) {
@@ -537,8 +598,9 @@
     .uni-grid { grid-template-columns: 1fr; }
     .container { padding: 16px; }
     .header { padding: 16px; }
+    .header-stats { flex-wrap: wrap; gap: 8px; }
     .week-grid { flex-wrap: wrap; }
-    .day-card { min-width: 70px; }
+    .day-card { min-width: 60px; }
   }
 
   /* Animations */
@@ -585,6 +647,39 @@
   }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
+
+  /* ── Week nav ── */
+  .week-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .week-nav-btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .week-nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  .week-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .week-nav-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
 
   /* ── Syllabus / Semana 7 ── */
   .syllabus-grid {
@@ -718,17 +813,37 @@
 </div>
 
 <script>
+// ── Data store ──
+let DASH_DATA = null;
+let SEMANA7_CURRENT_WEEK = 7;
+
+// ── Load ──
 async function loadDashboard() {
+  document.getElementById('app').innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Escaneando el vault...</div>
+    </div>
+  `;
   try {
     const res = await fetch('data.json?t=' + Date.now());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const d = await res.json();
+    DASH_DATA = d;
+    SEMANA7_CURRENT_WEEK = d.current_week || 7;
     render(d);
+    // If semana7 tab was already rendered, refresh it with new data
+    const s7tab = document.getElementById('tab-semana7');
+    if (s7tab.dataset.rendered) {
+      s7tab.dataset.rendered = '1'; // will re-render on next visit
+      s7tab.innerHTML = '<div class="loading"><div class="spinner"></div><div>Cargando plan calendario...</div></div>';
+    }
   } catch (e) {
     document.getElementById('app').innerHTML = `
-      <div class="empty-state">
-        ❌ Error cargando datos: ${e.message}<br>
-        <small>Ejecutá <code>./update.sh</code> primero para generar data.json</small>
+      <div class="error-state">
+        ❌ Error cargando datos: ${escapeHtml(e.message)}<br>
+        <small style="color:var(--text-dim)">¿Ejecutaste <code>./update.sh</code> primero?</small><br>
+        <button class="retry-btn" onclick="loadDashboard()">🔄 Reintentar</button>
       </div>
     `;
   }
@@ -750,7 +865,7 @@ function render(d) {
   document.getElementById('headerStats').innerHTML = `
     <span><strong>📝 ${total_notes}</strong> notas</span>
     <span><strong>📁</strong> ${vault_structure.length} carpetas</span>
-    <span class="update-time">⏱ ${formatTime(generated_at)}</span>
+    <span class="update-time" title="Actualizado: ${generated_at}">⏱ ${timeAgo(generated_at)}</span>
   `;
 
   const app = document.getElementById('app');
@@ -779,6 +894,9 @@ function render(d) {
         <div class="card-sub">en seguimiento</div>
       </div>
     </div>
+
+    <!-- Sparkline row: weekly checkin comparison -->
+    ${renderSparkline(weekly_progress_current, weekly_progress_prev)}
 
     <!-- University section -->
     <div class="grid">
@@ -848,6 +966,51 @@ function render(d) {
   `;
 }
 
+// ── Sparkline ──
+function renderSparkline(current, prev) {
+  if (!current || !prev) return '';
+  const dayOrder = ['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];
+  const days = current.days || {};
+  const prevDays = prev.days || {};
+
+  const maxVal = 3; // max possible checkin count
+  
+  let bars = dayOrder.map(d => {
+    const cur = days[d];
+    const prv = prevDays[d];
+    const curVal = cur ? [cur.checkin, cur.todolist, cur.summary].filter(Boolean).length : 0;
+    const prvVal = prv ? [prv.checkin, prv.todolist, prv.summary].filter(Boolean).length : 0;
+    const curH = Math.max(3, (curVal / maxVal) * 36);
+    const prvH = Math.max(3, (prvVal / maxVal) * 36);
+    return { day: d, curH, prvH, curVal, prvVal };
+  });
+
+  const totalCur = bars.reduce((s, b) => s + b.curVal, 0);
+  const totalPrv = bars.reduce((s, b) => s + b.prvVal, 0);
+
+  return `
+  <div class="grid">
+    <div class="card stat-sparkline fade-in" style="animation-delay:0.18s">
+      <div class="card-title">📊 Progreso Diario (checkins)</div>
+      <div class="sparkline-wrap">
+        ${bars.map(b => `
+          <div class="spark-bar-group">
+            <div class="spark-bars">
+              <div class="spark-bar current" style="height:${b.curH}px" title="${capitalize(b.day)}: ${b.curVal} actividades"></div>
+              <div class="spark-bar prev" style="height:${b.prvH}px" title="Semana pasada: ${b.prvVal}"></div>
+            </div>
+            <div class="spark-label">${capitalize(b.day).slice(0,3)}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="spark-legend">
+        <span><span class="dot" style="background:var(--accent)"></span> Esta semana (${totalCur})</span>
+        <span><span class="dot" style="background:var(--text-dim);opacity:0.4"></span> Semana pasada (${totalPrv})</span>
+      </div>
+    </div>
+  </div>`;
+}
+
 function capitalize(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
 }
@@ -868,10 +1031,10 @@ function renderWeek(week) {
     const info = week.days[d];
     const isToday = d === todayName;
     const icons = info ? `
-      <span class="icon ${info.checkin ? 'done' : 'missed'}">✓</span>
-      <span class="icon ${info.todolist ? 'done' : 'missed'}">☰</span>
-      <span class="icon ${info.summary ? 'done' : 'missed'}">Σ</span>
-    ` : `<span class="icon missed" style="width:100%">—</span>`;
+      <span class="icon ${info.checkin ? 'done' : 'missed'}" title="${info.checkin ? '✓ Check-in hecho' : '✗ Sin check-in'}">✓</span>
+      <span class="icon ${info.todolist ? 'done' : 'missed'}" title="${info.todolist ? '✓ TODO list hecha' : '✗ Sin TODO list'}">☰</span>
+      <span class="icon ${info.summary ? 'done' : 'missed'}" title="${info.summary ? '✓ Resumen escrito' : '✗ Sin resumen'}">Σ</span>
+    ` : `<span class="icon missed" style="width:100%" title="Día sin registrar">—</span>`;
     
     return `
       <div class="day-card ${isToday ? 'today' : ''}">
@@ -889,11 +1052,11 @@ function renderTasks(tasks) {
   return tasks.tasks.map(t => {
     const project = extractProject(t.task);
     return `
-      <div class="task-item">
+      <div class="task-item ${t.done ? 'done' : ''}">
         <div class="task-check">${t.done ? '✓' : ''}</div>
         <div>
           ${project ? `<div class="task-project">${project}</div>` : ''}
-          ${escapeHtml(t.task.replace(/\[\[(.*?)\]\]/g, '$1'))}
+          <span class="task-text">${escapeHtml(t.task.replace(/\[\[(.*?)\]\]/g, '$1'))}</span>
         </div>
       </div>
     `;
@@ -984,11 +1147,21 @@ function renderStructure(structure) {
   `).join('');
 }
 
-function formatTime(iso) {
+// ── Time helpers ──
+function timeAgo(iso) {
   try {
     const d = new Date(iso);
+    const now = new Date();
+    const diffMs = now - d;
+    const diffMin = Math.floor(diffMs / 60000);
+    if (diffMin < 1) return 'ahora mismo';
+    if (diffMin < 60) return `hace ${diffMin} min`;
+    const diffHrs = Math.floor(diffMin / 60);
+    if (diffHrs < 24) return `hace ${diffHrs}h`;
+    const diffDays = Math.floor(diffHrs / 24);
+    if (diffDays === 1) return 'ayer';
+    if (diffDays < 7) return `hace ${diffDays} días`;
     return d.toLocaleString('es-PE', { 
-      hour: '2-digit', minute: '2-digit',
       day: 'numeric', month: 'short'
     });
   } catch { return iso; }
@@ -1000,7 +1173,7 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Tab switching
+// ── Tab switching ──
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -1014,108 +1187,37 @@ function switchTab(name, btn) {
   }
 }
 
-// ── Syllabus Data ──
-
-const SYLLABUS = {
-  calculo: {
-    name: 'Cálculo II',
-    code: '1AMA0263',
-    credits: 6,
-    hours: '6h/sem (4h teoría + 2h práctica)',
-    prof: 'Joel Rojas (coord.)',
-    color: '#22d3ee',
-    weeks: 16,
-    currentWeek: 7,
-    weekRange: '11 MAY – 16 MAY',
-    thisWeek: 'Integrales triples en coordenadas rectangulares. Actividad colaborativa AAA2. Evaluación del AAA2 (hasta lun 18 may).',
-    units: [
-      { name: 'Unidad 1: Geometría del espacio', weeks: '1-5', evals: 'EU1 ✅ (sem 5)' },
-      { name: 'Unidad 2: Integrales dobles y triples', weeks: '6-10', evals: 'CV2 esta sem · EU2 (sem 10)' },
-      { name: 'Unidad 3: Cálculo vectorial', weeks: '11-16', evals: 'CV3 · EU3 · TF' },
-    ],
-    evalFormula: 'DD2 = 15% ACT2 + 15% CV2 + 70% EU2',
-    evalDetail: 'ACT2 = GNP2 + PEC2 + EAAA2 + APC2 + AAD2 (AAD2: participación semanas 6 y 7)',
-    finalFormula: 'PF = 0.15×DD1 + 0.25×DD2 + 0.30×DD3 + 0.30×ZB',
-    nextDeadline: { name: 'CV2 (Control Virtual 2)', date: 'Semana 7', weight: '15% de DD2', urgent: false },
-  },
-  estadistica: {
-    name: 'Estadística Aplicada',
-    code: '1AMA0741',
-    credits: 4,
-    hours: '4h/sem (3h sesión + 1h AAD)',
-    prof: '—',
-    color: '#fbbf24',
-    weeks: 16,
-    currentWeek: 7,
-    weekRange: '11 MAY – 17 MAY',
-    thisWeek: 'Primer avance del trabajo (debía entregarse lun 11 Mayo). Variable aleatoria discreta. Probabilidad condicional, total y teorema de Bayes.',
-    units: [
-      { name: 'DD1: Estadística descriptiva', weeks: '1-5', evals: 'Eval 1 ✅ (sem 5) · Tareas 1-4' },
-      { name: 'DD2: Probabilidad y muestreo', weeks: '6-14', evals: 'Eval 2 (sem 12) · Tareas 5-11' },
-      { name: 'ZB: Trabajo Final', weeks: '14-16', evals: 'Entrega + Sustentación' },
-    ],
-    evalFormula: 'DD1 = 25% Eval 1 + 10% Prom Tareas 1-4',
-    evalDetail: 'DD2 = 25% Eval 2 + 10% Prom Tareas 5-11 · ZB = 15% Entrega + 25% Sustentación',
-    finalFormula: 'PF = 30% DD1 + 30% DD2 + 40% ZB',
-    nextDeadline: { name: 'Primer avance del trabajo', date: '11 MAY (vencido ⚠️)', weight: '—', urgent: true },
-  },
-  so: {
-    name: 'Sistemas Operativos',
-    code: '1ASI0726',
-    credits: 4,
-    hours: '4h/sem',
-    prof: 'Robert Zubieta Cardenas',
-    color: '#a78bfa',
-    weeks: 16,
-    currentWeek: 7,
-    weekRange: '11 MAY – 17 MAY',
-    thisWeek: 'Unidad 2: Estructura y Fundamentos (sem 4-8). TB1 entregado ✅. Preparar EA1 (sem 8).',
-    units: [
-      { name: 'Unidad 1: Overview', weeks: '1-3', evals: 'PC1 ✅' },
-      { name: 'Unidad 2: Estructura y Fundamentos', weeks: '4-8', evals: 'PC2 ✅ · TB1 ✅ · EA1 (sem 8)' },
-      { name: 'Unidad 3: Administración', weeks: '9-12', evals: 'PC3 (sem 9-12)' },
-      { name: 'Unidad 4: SO Principales', weeks: '13-14', evals: 'PC4' },
-      { name: 'Unidad 5: Outcome ABET 6', weeks: '15-16', evals: 'DD1 · EB1 · TB2' },
-    ],
-    evalFormula: 'NF = 0.10 PC1 + 0.10 PC2 + 0.05 TB1 + 0.10 EA1 + 0.10 PC3 + 0.10 PC4 + 0.15 DD1 + 0.15 TB2 + 0.15 EB1',
-    evalDetail: 'TB1 = 5% ✅ ya entregado',
-    finalFormula: 'NF = 0.10 PC1 + 0.10 PC2 + 0.05 TB1 + 0.10 EA1 + 0.10 PC3 + 0.10 PC4 + 0.15 DD1 + 0.15 TB2 + 0.15 EB1',
-    nextDeadline: { name: 'EA1 — Evaluación Parcial', date: '24 MAY (sem 8)', weight: '10%', urgent: false },
-  },
-  appsMoviles: {
-    name: 'Aplicaciones Móviles',
-    code: '1ACC0238',
-    credits: 4,
-    hours: '4h/sem',
-    prof: 'Eduardo Martin Reyes Rodriguez',
-    color: '#34d399',
-    weeks: 16,
-    currentWeek: 7,
-    weekRange: '11 MAY – 17 MAY',
-    thisWeek: 'Unidad 2: Native Mobile Development (sem 3-8). TB1 en progreso (~70%). Deploy backend Klippr pendiente.',
-    units: [
-      { name: 'Unidad 1: Overview', weeks: '1-2', evals: 'PC1' },
-      { name: 'Unidad 2: Native Mobile Development', weeks: '3-8', evals: 'TB1 entrega esta sem · EA Parcial 1' },
-      { name: 'Unidad 3: Cross-Platform (Flutter)', weeks: '9-12', evals: 'PC2' },
-      { name: 'Unidad 4: iOS + Complementarios', weeks: '13-16', evals: 'DD1 · EF1 · TB2' },
-    ],
-    evalFormula: 'PC1 + TB1 + EA Parcial + PC2 + DD1 + EF1 + TB2',
-    evalDetail: 'Evaluaciones: PC1 (sem 1-2), TB1 (sem 3-8), EA Parcial, PC2 (sem 9-12), DD1, EF1, TB2',
-    finalFormula: 'Evaluación por competencias (Pensamiento Innovador N2 + ABET 7 N2)',
-    nextDeadline: { name: 'TB1 — Trabajo 1 (entrega)', date: '17 MAY (domingo)', weight: '—', urgent: true },
-  },
-};
-
-// ── Semana 7 Renderer ──
+// ── Semana 7 Renderer (data-driven from DASH_DATA.syllabus) ──
 
 function renderSemana7() {
-  const s = SYLLABUS;
+  const s = DASH_DATA?.syllabus;
+  if (!s) {
+    return `
+      <div class="grid">
+        <div class="card week-section">
+          <div class="card-title">📚 Plan Calendario</div>
+          <div class="empty-state">⚠️ No hay datos de sílabos. Ejecutá <code>./update.sh</code>.</div>
+        </div>
+      </div>
+    `;
+  }
+
+  const week = SEMANA7_CURRENT_WEEK;
+  const syllabusKeys = Object.keys(s);
+  // Determine overall week range from first syllabus that has weekRange
+  const weekRange = s[syllabusKeys[0]]?.weekRange || '';
+
   return `
     <div class="grid">
       <div class="card week-section" style="margin-bottom:0">
-        <div class="card-title">📚 Plan Calendario · Semana 7 (11-17 MAY 2026)</div>
+        <div class="card-title">📚 Plan Calendario · Semana ${week} (${weekRange})</div>
         <div style="font-size:13px; color:var(--text-dim); margin-top:4px">
           Resumen de sílabos, evaluaciones y deadlines para la semana actual
+        </div>
+        <div class="week-nav">
+          <button class="week-nav-btn" onclick="navigateWeek(-1)" id="weekPrevBtn">← Sem ${week-1}</button>
+          <span class="week-nav-label">Semana ${week}</span>
+          <button class="week-nav-btn" onclick="navigateWeek(1)" id="weekNextBtn">Sem ${week+1} →</button>
         </div>
       </div>
     </div>
@@ -1129,39 +1231,49 @@ function renderSemana7() {
   `;
 }
 
+function navigateWeek(delta) {
+  SEMANA7_CURRENT_WEEK += delta;
+  if (SEMANA7_CURRENT_WEEK < 1) SEMANA7_CURRENT_WEEK = 1;
+  if (SEMANA7_CURRENT_WEEK > 16) SEMANA7_CURRENT_WEEK = 16;
+  const tab = document.getElementById('tab-semana7');
+  tab.innerHTML = renderSemana7();
+}
+
 function renderSyllabusCard(course) {
-  const isDanger = course.nextDeadline.urgent && course.nextDeadline.date.includes('vencido');
-  const deadlineClass = course.nextDeadline.urgent
+  if (!course) return '';
+  const isDanger = course.nextDeadline?.urgent && (course.nextDeadline.date || '').includes('vencido');
+  const deadlineClass = course.nextDeadline?.urgent
     ? (isDanger ? 'danger-deadline' : 'upcoming-deadline')
     : '';
+  const nd = course.nextDeadline || {};
 
   return `
     <div class="syllabus-card">
-      <h3 style="color:${course.color}">${course.name}</h3>
-      <div class="code">${course.code} · ${course.credits} créditos</div>
+      <h3 style="color:${course.color || 'var(--text)'}">${course.name}</h3>
+      <div class="code">${course.code || ''} · ${course.credits || '?'} créditos</div>
       <div class="meta">
-        <span>🕐 ${course.hours}</span>
-        <span>📅 ${course.weeks} semanas</span>
-        <span>👨‍🏫 ${course.prof}</span>
+        <span>🕐 ${course.hours || '—'}</span>
+        <span>📅 ${course.weeks || '?'} semanas</span>
+        <span>👨‍🏫 ${course.prof || '—'}</span>
       </div>
 
       <div class="this-week">
-        <div class="title">📌 Esta semana (${course.weekRange})</div>
-        <div style="font-size:13px; line-height:1.6">${course.thisWeek}</div>
+        <div class="title">📌 Esta semana (${course.weekRange || ''})</div>
+        <div style="font-size:13px; line-height:1.6">${course.thisWeek || '—'}</div>
       </div>
 
       <div class="label">📋 Unidades</div>
       <ul>
-        ${course.units.map(u => `<li>${u.name} <span style="color:var(--text-dim)">(${u.weeks})</span> — ${u.evals}</li>`).join('')}
+        ${(course.units || []).map(u => `<li>${u.name} <span style="color:var(--text-dim)">(${u.weeks})</span> — ${u.evals}</li>`).join('')}
       </ul>
 
       <div class="label">📐 Evaluación</div>
-      <div class="eval-formula">${course.evalFormula}</div>
+      <div class="eval-formula">${course.evalFormula || '—'}</div>
       ${course.evalDetail ? `<div style="font-size:12px; color:var(--text-dim); margin:4px 0 8px">${course.evalDetail}</div>` : ''}
 
       <div class="label">🎯 Próximo vencimiento</div>
       <div class="${deadlineClass}" style="font-size:14px">
-        ${course.nextDeadline.urgent ? '⚠️ ' : '📌 '}${course.nextDeadline.name} — ${course.nextDeadline.date} ${course.nextDeadline.weight ? '· ' + course.nextDeadline.weight : ''}
+        ${nd.urgent ? '⚠️ ' : '📌 '}${nd.name || '—'} — ${nd.date || '—'} ${nd.weight ? '· ' + nd.weight : ''}
       </div>
     </div>
   `;
