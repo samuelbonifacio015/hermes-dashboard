@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-05-14T15:57:09.159119",
-  "total_notes": 205,
+  "generated_at": "2026-05-20T09:34:08.480726",
+  "total_notes": 674,
   "notes_by_area": {
-    "2026": 173,
+    "2026": 643,
     "Universidad": 24,
     "Excalidraw": 1,
-    "(otros)": 7
+    "(otros)": 6
   },
   "vault_structure": [
     {
       "name": "2026",
-      "notes": 173
+      "notes": 643
     },
     {
       "name": "Excalidraw",
@@ -18,7 +18,7 @@
     },
     {
       "name": "MYS",
-      "notes": 3
+      "notes": 2
     },
     {
       "name": "Universidad",
@@ -26,6 +26,53 @@
     }
   ],
   "weekly_progress_current": {
+    "label": "Semana 8 (18 May - 24 May)",
+    "days": {
+      "lunes": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "martes": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "miercoles": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "jueves": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "viernes": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "sabado": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "domingo": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      }
+    }
+  },
+  "weekly_progress_prev": {
     "label": "Semana 7 (11 May - 17 May)",
     "days": {
       "lunes": {
@@ -54,13 +101,13 @@
       },
       "viernes": {
         "checkin": false,
-        "todolist": false,
+        "todolist": true,
         "summary": false,
         "todoreviewer": false
       },
       "sabado": {
         "checkin": false,
-        "todolist": false,
+        "todolist": true,
         "summary": false,
         "todoreviewer": false
       },
@@ -72,73 +119,22 @@
       }
     }
   },
-  "weekly_progress_prev": {
-    "label": "Semana 6 (4 May - 10 May)",
-    "days": {
-      "lunes": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": true
-      },
-      "martes": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": true
-      },
-      "miercoles": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": true
-      },
-      "jueves": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": false
-      },
-      "viernes": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": false
-      },
-      "sabado": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": false
-      },
-      "domingo": {
-        "checkin": true,
-        "todolist": true,
-        "summary": true,
-        "todoreviewer": false
-      }
-    }
-  },
-  "current_week": 7,
+  "current_week": 8,
   "today_tasks": {
-    "day": "jueves",
-    "date": "2026-05-14",
+    "day": "miercoles",
+    "date": "2026-05-20",
     "tasks": [
       {
-        "task": "[[Estadistica Aplicada - EU1]] - Representación de variables **(Tipos, Variable, Escala de Medición, etc)**",
-        "done": true
+        "task": "[[Refactorización Pizarra]] - **Ideas Frescas = Mente Fresca**",
+        "done": false
       },
       {
-        "task": "[[Estadistica Aplicada - EU1]] - C.V (**Coeficiente de Variación**), etc.",
-        "done": true
+        "task": "[[Apps Moviles EP]] - Examen a las 8pm",
+        "done": false
       },
       {
-        "task": "[[MaquinariasJyS]] - Responsive de Frontend",
-        "done": true
-      },
-      {
-        "task": "[Estadistica Aplicada - EU1] - Exámen de Simulación",
-        "done": true
+        "task": "[[Klippr - Kotlin]] - Dependencias y arquitectura del proyecto con **ROOM**",
+        "done": false
       }
     ]
   },
@@ -150,10 +146,6 @@
     "QRust / Klippr": {
       "notes": 6,
       "type": "🎯 En desarrollo"
-    },
-    "WeTech / La AgencIA": {
-      "notes": 3,
-      "type": "🌱 Semilla"
     }
   },
   "university": {
@@ -177,7 +169,7 @@
       "fecha": "2026-05-10",
       "tipo": "🔴 Entrega",
       "peso": "15%",
-      "dias_restantes": -4,
+      "dias_restantes": -10,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -187,7 +179,7 @@
       "fecha": "2026-05-11",
       "tipo": "📄 Avance",
       "peso": "—",
-      "dias_restantes": -3,
+      "dias_restantes": -9,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -197,9 +189,9 @@
       "fecha": "2026-05-17",
       "tipo": "📄 Trabajo",
       "peso": "5%",
-      "dias_restantes": 3,
-      "status": "muy_proximo",
-      "label": "🟡 En 3 días"
+      "dias_restantes": -3,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
     },
     {
       "curso": "Aplicaciones Móviles",
@@ -207,9 +199,9 @@
       "fecha": "2026-05-17",
       "tipo": "📄 Trabajo",
       "peso": "15%",
-      "dias_restantes": 3,
-      "status": "muy_proximo",
-      "label": "🟡 En 3 días"
+      "dias_restantes": -3,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
     },
     {
       "curso": "Sistemas Operativos",
@@ -217,9 +209,9 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "10%",
-      "dias_restantes": 10,
-      "status": "lejano",
-      "label": "📌 En 10 días"
+      "dias_restantes": 4,
+      "status": "proximo",
+      "label": "🟡 En 4 días"
     },
     {
       "curso": "Aplicaciones Móviles",
@@ -227,9 +219,9 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "15%",
-      "dias_restantes": 10,
-      "status": "lejano",
-      "label": "📌 En 10 días"
+      "dias_restantes": 4,
+      "status": "proximo",
+      "label": "🟡 En 4 días"
     },
     {
       "curso": "Cálculo II",
@@ -237,9 +229,9 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "25%",
-      "dias_restantes": 10,
-      "status": "lejano",
-      "label": "📌 En 10 días"
+      "dias_restantes": 4,
+      "status": "proximo",
+      "label": "🟡 En 4 días"
     }
   ],
   "recent_activity": [],
@@ -252,9 +244,9 @@
       "prof": "Joel Rojas (coord.)",
       "color": "#22d3ee",
       "weeks": 16,
-      "currentWeek": 7,
-      "weekRange": "11 MAY – 16 MAY",
-      "thisWeek": "Integrales triples en coordenadas rectangulares. Actividad colaborativa AAA2. Evaluación del AAA2 (hasta lun 18 may).",
+      "currentWeek": 8,
+      "weekRange": "18 MAY – 24 MAY",
+      "thisWeek": "Integrales dobles y triples: consolidar práctica de Unidad 2, cerrar pendientes de AAA2 y preparar EU2/CV2.",
       "units": [
         {
           "name": "Unidad 1: Geometría del espacio",
@@ -264,7 +256,7 @@
         {
           "name": "Unidad 2: Integrales dobles y triples",
           "weeks": "6-10",
-          "evals": "CV2 esta sem · EU2 (sem 10)"
+          "evals": "CV2/EU2 en preparación"
         },
         {
           "name": "Unidad 3: Cálculo vectorial",
@@ -276,9 +268,9 @@
       "evalDetail": "ACT2 = GNP2 + PEC2 + EAAA2 + APC2 + AAD2 (AAD2: participación semanas 6 y 7)",
       "finalFormula": "PF = 0.15×DD1 + 0.25×DD2 + 0.30×DD3 + 0.30×ZB",
       "nextDeadline": {
-        "name": "CV2 (Control Virtual 2)",
-        "date": "Semana 7",
-        "weight": "15% de DD2",
+        "name": "EU2 / CV2 — Unidad 2",
+        "date": "Semana 8-10",
+        "weight": "DD2",
         "urgent": false
       }
     },
@@ -290,9 +282,9 @@
       "prof": "—",
       "color": "#fbbf24",
       "weeks": 16,
-      "currentWeek": 7,
-      "weekRange": "11 MAY – 17 MAY",
-      "thisWeek": "Primer avance del trabajo (debía entregarse lun 11 Mayo). Variable aleatoria discreta. Probabilidad condicional, total y teorema de Bayes.",
+      "currentWeek": 8,
+      "weekRange": "18 MAY – 24 MAY",
+      "thisWeek": "Unidad DD2: probabilidad, variable aleatoria y práctica de muestreo. Mantener avance del trabajo final al día.",
       "units": [
         {
           "name": "DD1: Estadística descriptiva",
@@ -314,10 +306,10 @@
       "evalDetail": "DD2 = 25% Eval 2 + 10% Prom Tareas 5-11 · ZB = 15% Entrega + 25% Sustentación",
       "finalFormula": "PF = 30% DD1 + 30% DD2 + 40% ZB",
       "nextDeadline": {
-        "name": "Primer avance del trabajo",
-        "date": "11 MAY (vencido ⚠️)",
-        "weight": "—",
-        "urgent": true
+        "name": "Eval 2 / tareas DD2",
+        "date": "Semana 12",
+        "weight": "DD2",
+        "urgent": false
       }
     },
     "so": {
@@ -328,9 +320,9 @@
       "prof": "Robert Zubieta Cardenas",
       "color": "#a78bfa",
       "weeks": 16,
-      "currentWeek": 7,
-      "weekRange": "11 MAY – 17 MAY",
-      "thisWeek": "Unidad 2: Estructura y Fundamentos (sem 4-8). TB1 entregado ✅. Preparar EA1 (sem 8).",
+      "currentWeek": 8,
+      "weekRange": "18 MAY – 24 MAY",
+      "thisWeek": "Semana 8: cierre de Unidad 2 y preparación fuerte para EA1 — Evaluación Parcial.",
       "units": [
         {
           "name": "Unidad 1: Overview",
@@ -376,9 +368,9 @@
       "prof": "Eduardo Martin Reyes Rodriguez",
       "color": "#34d399",
       "weeks": 16,
-      "currentWeek": 7,
-      "weekRange": "11 MAY – 17 MAY",
-      "thisWeek": "Unidad 2: Native Mobile Development (sem 3-8). TB1 en progreso (~70%). Deploy backend Klippr pendiente.",
+      "currentWeek": 8,
+      "weekRange": "18 MAY – 24 MAY",
+      "thisWeek": "Semana 8: examen parcial de Apps Móviles y arquitectura Klippr/Kotlin con ROOM.",
       "units": [
         {
           "name": "Unidad 1: Overview",
@@ -388,7 +380,7 @@
         {
           "name": "Unidad 2: Native Mobile Development",
           "weeks": "3-8",
-          "evals": "TB1 entrega esta sem · EA Parcial 1"
+          "evals": "TB1 · EA Parcial 1 esta sem"
         },
         {
           "name": "Unidad 3: Cross-Platform (Flutter)",
@@ -405,10 +397,10 @@
       "evalDetail": "Evaluaciones: PC1 (sem 1-2), TB1 (sem 3-8), EA Parcial, PC2 (sem 9-12), DD1, EF1, TB2",
       "finalFormula": "Evaluación por competencias (Pensamiento Innovador N2 + ABET 7 N2)",
       "nextDeadline": {
-        "name": "TB1 — Trabajo 1 (entrega)",
-        "date": "17 MAY (domingo)",
-        "weight": "—",
-        "urgent": true
+        "name": "EA1 — Evaluación Parcial",
+        "date": "24 MAY (sem 8)",
+        "weight": "15%",
+        "urgent": false
       }
     }
   }

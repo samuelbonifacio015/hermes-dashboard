@@ -11,6 +11,7 @@ VAULT = Path("/home/samuel/obsidian-notes/obsidian")
 OUTPUT = Path("/home/samuel/codigo/sem6-dashboard/data.json")
 SEMANA_6 = VAULT / "2026/Mayo/Semana 6"
 SEMANA_7 = VAULT / "2026/Mayo/Semana 7"
+SEMANA_8 = VAULT / "2026/Mayo/Semana 8"
 CONOCIMIENTO = VAULT / "2026/Conocimiento"
 UNIVERSIDAD = VAULT / "Universidad"
 MAYO = VAULT / "2026/Mayo"
@@ -128,8 +129,16 @@ def get_today_tasks_from_vault():
     }
     es_day = day_map.get(day_name)
     
-    # Check both semana 6 and semana 7
-    for semana_path in [SEMANA_6, SEMANA_7]:
+    # Check current week first, then recent weeks as fallback
+    current_week_num, current_week_path = get_current_semana()
+    semana_paths = []
+    if current_week_path:
+        semana_paths.append(current_week_path)
+    for p in [SEMANA_8, SEMANA_7, SEMANA_6]:
+        if p not in semana_paths:
+            semana_paths.append(p)
+
+    for semana_path in semana_paths:
         todo_file = semana_path / es_day / f"{es_day}-todolist.md"
         if todo_file.exists():
             content = todo_file.read_text()
@@ -351,18 +360,18 @@ def get_syllabus():
             "prof": "Joel Rojas (coord.)",
             "color": "#22d3ee",
             "weeks": 16,
-            "currentWeek": 7,
-            "weekRange": "11 MAY – 16 MAY",
-            "thisWeek": "Integrales triples en coordenadas rectangulares. Actividad colaborativa AAA2. Evaluación del AAA2 (hasta lun 18 may).",
+            "currentWeek": 8,
+            "weekRange": "18 MAY – 24 MAY",
+            "thisWeek": "Integrales dobles y triples: consolidar práctica de Unidad 2, cerrar pendientes de AAA2 y preparar EU2/CV2.",
             "units": [
                 {"name": "Unidad 1: Geometría del espacio", "weeks": "1-5", "evals": "EU1 ✅ (sem 5)"},
-                {"name": "Unidad 2: Integrales dobles y triples", "weeks": "6-10", "evals": "CV2 esta sem · EU2 (sem 10)"},
+                {"name": "Unidad 2: Integrales dobles y triples", "weeks": "6-10", "evals": "CV2/EU2 en preparación"},
                 {"name": "Unidad 3: Cálculo vectorial", "weeks": "11-16", "evals": "CV3 · EU3 · TF"},
             ],
             "evalFormula": "DD2 = 15% ACT2 + 15% CV2 + 70% EU2",
             "evalDetail": "ACT2 = GNP2 + PEC2 + EAAA2 + APC2 + AAD2 (AAD2: participación semanas 6 y 7)",
             "finalFormula": "PF = 0.15×DD1 + 0.25×DD2 + 0.30×DD3 + 0.30×ZB",
-            "nextDeadline": {"name": "CV2 (Control Virtual 2)", "date": "Semana 7", "weight": "15% de DD2", "urgent": False},
+            "nextDeadline": {"name": "EU2 / CV2 — Unidad 2", "date": "Semana 8-10", "weight": "DD2", "urgent": False},
         },
         "estadistica": {
             "name": "Estadística Aplicada",
@@ -372,9 +381,9 @@ def get_syllabus():
             "prof": "—",
             "color": "#fbbf24",
             "weeks": 16,
-            "currentWeek": 7,
-            "weekRange": "11 MAY – 17 MAY",
-            "thisWeek": "Primer avance del trabajo (debía entregarse lun 11 Mayo). Variable aleatoria discreta. Probabilidad condicional, total y teorema de Bayes.",
+            "currentWeek": 8,
+            "weekRange": "18 MAY – 24 MAY",
+            "thisWeek": "Unidad DD2: probabilidad, variable aleatoria y práctica de muestreo. Mantener avance del trabajo final al día.",
             "units": [
                 {"name": "DD1: Estadística descriptiva", "weeks": "1-5", "evals": "Eval 1 ✅ (sem 5) · Tareas 1-4"},
                 {"name": "DD2: Probabilidad y muestreo", "weeks": "6-14", "evals": "Eval 2 (sem 12) · Tareas 5-11"},
@@ -383,7 +392,7 @@ def get_syllabus():
             "evalFormula": "DD1 = 25% Eval 1 + 10% Prom Tareas 1-4",
             "evalDetail": "DD2 = 25% Eval 2 + 10% Prom Tareas 5-11 · ZB = 15% Entrega + 25% Sustentación",
             "finalFormula": "PF = 30% DD1 + 30% DD2 + 40% ZB",
-            "nextDeadline": {"name": "Primer avance del trabajo", "date": "11 MAY (vencido ⚠️)", "weight": "—", "urgent": True},
+            "nextDeadline": {"name": "Eval 2 / tareas DD2", "date": "Semana 12", "weight": "DD2", "urgent": False},
         },
         "so": {
             "name": "Sistemas Operativos",
@@ -393,9 +402,9 @@ def get_syllabus():
             "prof": "Robert Zubieta Cardenas",
             "color": "#a78bfa",
             "weeks": 16,
-            "currentWeek": 7,
-            "weekRange": "11 MAY – 17 MAY",
-            "thisWeek": "Unidad 2: Estructura y Fundamentos (sem 4-8). TB1 entregado ✅. Preparar EA1 (sem 8).",
+            "currentWeek": 8,
+            "weekRange": "18 MAY – 24 MAY",
+            "thisWeek": "Semana 8: cierre de Unidad 2 y preparación fuerte para EA1 — Evaluación Parcial.",
             "units": [
                 {"name": "Unidad 1: Overview", "weeks": "1-3", "evals": "PC1 ✅"},
                 {"name": "Unidad 2: Estructura y Fundamentos", "weeks": "4-8", "evals": "PC2 ✅ · TB1 ✅ · EA1 (sem 8)"},
@@ -416,19 +425,19 @@ def get_syllabus():
             "prof": "Eduardo Martin Reyes Rodriguez",
             "color": "#34d399",
             "weeks": 16,
-            "currentWeek": 7,
-            "weekRange": "11 MAY – 17 MAY",
-            "thisWeek": "Unidad 2: Native Mobile Development (sem 3-8). TB1 en progreso (~70%). Deploy backend Klippr pendiente.",
+            "currentWeek": 8,
+            "weekRange": "18 MAY – 24 MAY",
+            "thisWeek": "Semana 8: examen parcial de Apps Móviles y arquitectura Klippr/Kotlin con ROOM.",
             "units": [
                 {"name": "Unidad 1: Overview", "weeks": "1-2", "evals": "PC1"},
-                {"name": "Unidad 2: Native Mobile Development", "weeks": "3-8", "evals": "TB1 entrega esta sem · EA Parcial 1"},
+                {"name": "Unidad 2: Native Mobile Development", "weeks": "3-8", "evals": "TB1 · EA Parcial 1 esta sem"},
                 {"name": "Unidad 3: Cross-Platform (Flutter)", "weeks": "9-12", "evals": "PC2"},
                 {"name": "Unidad 4: iOS + Complementarios", "weeks": "13-16", "evals": "DD1 · EF1 · TB2"},
             ],
             "evalFormula": "PC1 + TB1 + EA Parcial + PC2 + DD1 + EF1 + TB2",
             "evalDetail": "Evaluaciones: PC1 (sem 1-2), TB1 (sem 3-8), EA Parcial, PC2 (sem 9-12), DD1, EF1, TB2",
             "finalFormula": "Evaluación por competencias (Pensamiento Innovador N2 + ABET 7 N2)",
-            "nextDeadline": {"name": "TB1 — Trabajo 1 (entrega)", "date": "17 MAY (domingo)", "weight": "—", "urgent": True},
+            "nextDeadline": {"name": "EA1 — Evaluación Parcial", "date": "24 MAY (sem 8)", "weight": "15%", "urgent": False},
         },
     }
 

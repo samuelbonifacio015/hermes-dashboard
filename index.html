@@ -681,7 +681,7 @@
     font-weight: 500;
   }
 
-  /* ── Syllabus / Semana 7 ── */
+  /* ── Syllabus / Semana 8 ── */
   .syllabus-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -792,8 +792,8 @@
       <span class="badge">vault</span>
     </div>
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('overview', this)">📊 Overview</button>
-      <button class="tab-btn" onclick="switchTab('semana7', this)">📚 Semana 7</button>
+      <button class="tab-btn" onclick="switchTab('overview', this)">📊 Overview</button>
+      <button class="tab-btn active" onclick="switchTab('semana8', this)">📚 Semana 8</button>
     </div>
     <div class="header-stats" id="headerStats">
       <span class="update-time" id="updateTime">⏳ cargando...</span>
@@ -801,21 +801,24 @@
   </div>
 </div>
 
-<div class="container" id="app">
-  <div class="loading">
-    <div class="spinner"></div>
-    <div>Escaneando el vault...</div>
+<div class="container tab-content" id="tab-overview">
+  <div id="app">
+    <div class="loading">
+      <div class="spinner"></div>
+      <div>Escaneando el vault...</div>
+    </div>
   </div>
 </div>
 
-<div class="container tab-content" id="tab-semana7">
-  <div class="loading"><div class="spinner"></div><div>Cargando plan calendario...</div></div>
+<div class="container tab-content active" id="tab-semana8">
+  <div class="loading"><div class="spinner"></div><div>Cargando plan calendario de Semana 8...</div></div>
 </div>
 
 <script>
 // ── Data store ──
 let DASH_DATA = null;
-let SEMANA7_CURRENT_WEEK = 7;
+let dashboardData = null;
+let SEMANA8_CURRENT_WEEK = 8;
 
 // ── Load ──
 async function loadDashboard() {
@@ -830,13 +833,13 @@ async function loadDashboard() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const d = await res.json();
     DASH_DATA = d;
-    SEMANA7_CURRENT_WEEK = d.current_week || 7;
+    SEMANA8_CURRENT_WEEK = d.current_week || 8;
     render(d);
-    // If semana7 tab was already rendered, refresh it with new data
-    const s7tab = document.getElementById('tab-semana7');
-    if (s7tab.dataset.rendered) {
-      s7tab.dataset.rendered = '1'; // will re-render on next visit
-      s7tab.innerHTML = '<div class="loading"><div class="spinner"></div><div>Cargando plan calendario...</div></div>';
+    // If Semana 8 tab is active, refresh it with new data
+    const s8tab = document.getElementById('tab-semana8');
+    if (s8tab && s8tab.classList.contains('active')) {
+      s8tab.dataset.rendered = '1';
+      s8tab.innerHTML = renderSemana8();
     }
   } catch (e) {
     document.getElementById('app').innerHTML = `
@@ -850,6 +853,8 @@ async function loadDashboard() {
 }
 
 function render(d) {
+  DASH_DATA = d;
+  dashboardData = d;
   const { 
     total_notes, notes_by_area, vault_structure,
     weekly_progress_current, weekly_progress_prev,
@@ -964,6 +969,12 @@ function render(d) {
       </div>
     </div>` : ''}
   `;
+
+  const activeSemana8 = document.getElementById('tab-semana8');
+  if (activeSemana8 && activeSemana8.classList.contains('active')) {
+    activeSemana8.dataset.rendered = '1';
+    activeSemana8.innerHTML = renderSemana8();
+  }
 }
 
 // ── Sparkline ──
@@ -1179,17 +1190,18 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   btn.classList.add('active');
   const tab = document.getElementById('tab-' + name);
+  if (!tab) return;
   tab.classList.add('active');
-  // Render Semana 7 tab on first visit
-  if (name === 'semana7' && !tab.dataset.rendered) {
+  // Render Semana 8 tab on first visit
+  if (name === 'semana8' && !tab.dataset.rendered && dashboardData) {
     tab.dataset.rendered = '1';
-    tab.innerHTML = renderSemana7();
+    tab.innerHTML = renderSemana8();
   }
 }
 
-// ── Semana 7 Renderer (data-driven from DASH_DATA.syllabus) ──
+// ── Semana 8 Renderer (data-driven from DASH_DATA.syllabus) ──
 
-function renderSemana7() {
+function renderSemana8() {
   const s = DASH_DATA?.syllabus;
   if (!s) {
     return `
@@ -1202,9 +1214,8 @@ function renderSemana7() {
     `;
   }
 
-  const week = SEMANA7_CURRENT_WEEK;
+  const week = SEMANA8_CURRENT_WEEK;
   const syllabusKeys = Object.keys(s);
-  // Determine overall week range from first syllabus that has weekRange
   const weekRange = s[syllabusKeys[0]]?.weekRange || '';
 
   return `
@@ -1232,11 +1243,11 @@ function renderSemana7() {
 }
 
 function navigateWeek(delta) {
-  SEMANA7_CURRENT_WEEK += delta;
-  if (SEMANA7_CURRENT_WEEK < 1) SEMANA7_CURRENT_WEEK = 1;
-  if (SEMANA7_CURRENT_WEEK > 16) SEMANA7_CURRENT_WEEK = 16;
-  const tab = document.getElementById('tab-semana7');
-  tab.innerHTML = renderSemana7();
+  SEMANA8_CURRENT_WEEK += delta;
+  if (SEMANA8_CURRENT_WEEK < 1) SEMANA8_CURRENT_WEEK = 1;
+  if (SEMANA8_CURRENT_WEEK > 16) SEMANA8_CURRENT_WEEK = 16;
+  const tab = document.getElementById('tab-semana8');
+  tab.innerHTML = renderSemana8();
 }
 
 function renderSyllabusCard(course) {
