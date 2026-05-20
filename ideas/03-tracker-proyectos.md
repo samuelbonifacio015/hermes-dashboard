@@ -17,7 +17,7 @@ Convertir la sección de proyectos en un tracker visual con:
 |---|---|---|
 | 🚧 MaquinariasJyS | Hoy | Deploy backend + DB |
 | 🎯 QRust / Klippr | Semana 6 | TB1 |
-| 🌱 La AgencIA | Abril | Definición inicial |
+| 🌱 LlamIA | Abril | Definición inicial |
 | 📖 Manga Lore | — | Empezar HTML/CSS |
 
 ## Cómo implementarlo

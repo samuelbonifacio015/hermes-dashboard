@@ -182,11 +182,11 @@ def get_project_status():
             "type": "🎯 En desarrollo"
         }
     
-    # WeTech / La AgencIA
-    lacencia = MAYO / "La AgencIA"
+    # WeTech / LlamIA
+    lacencia = MAYO / "LlamIA"
     if lacencia.exists():
         wt_notes = [f.stem for f in lacencia.iterdir() if f.suffix == ".md"]
-        projects["WeTech / La AgencIA"] = {
+        projects["WeTech / LlamIA"] = {
             "notes": len(wt_notes),
             "type": "🌱 Semilla"
         }

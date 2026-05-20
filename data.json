@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-05-20T09:34:08.480726",
-  "total_notes": 674,
+  "generated_at": "2026-05-20T11:55:28.654114",
+  "total_notes": 675,
   "notes_by_area": {
     "2026": 643,
     "Universidad": 24,
     "Excalidraw": 1,
-    "(otros)": 6
+    "(otros)": 7
   },
   "vault_structure": [
     {
@@ -146,6 +146,10 @@
     "QRust / Klippr": {
       "notes": 6,
       "type": "🎯 En desarrollo"
+    },
+    "WeTech / LlamIA": {
+      "notes": 3,
+      "type": "🌱 Semilla"
     }
   },
   "university": {
