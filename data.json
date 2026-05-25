@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-05-20T11:55:28.654114",
-  "total_notes": 675,
+  "generated_at": "2026-05-25T09:02:09.105697",
+  "total_notes": 730,
   "notes_by_area": {
-    "2026": 643,
+    "2026": 697,
     "Universidad": 24,
     "Excalidraw": 1,
-    "(otros)": 7
+    "(otros)": 8
   },
   "vault_structure": [
     {
       "name": "2026",
-      "notes": 643
+      "notes": 697
     },
     {
       "name": "Excalidraw",
@@ -26,56 +26,13 @@
     }
   ],
   "weekly_progress_current": {
+    "label": "Semana 9",
+    "days": {}
+  },
+  "weekly_progress_prev": {
     "label": "Semana 8 (18 May - 24 May)",
     "days": {
       "lunes": {
-        "checkin": false,
-        "todolist": true,
-        "summary": false,
-        "todoreviewer": false
-      },
-      "martes": {
-        "checkin": false,
-        "todolist": true,
-        "summary": false,
-        "todoreviewer": false
-      },
-      "miercoles": {
-        "checkin": false,
-        "todolist": true,
-        "summary": false,
-        "todoreviewer": false
-      },
-      "jueves": {
-        "checkin": false,
-        "todolist": false,
-        "summary": false,
-        "todoreviewer": false
-      },
-      "viernes": {
-        "checkin": false,
-        "todolist": false,
-        "summary": false,
-        "todoreviewer": false
-      },
-      "sabado": {
-        "checkin": false,
-        "todolist": false,
-        "summary": false,
-        "todoreviewer": false
-      },
-      "domingo": {
-        "checkin": false,
-        "todolist": false,
-        "summary": false,
-        "todoreviewer": false
-      }
-    }
-  },
-  "weekly_progress_prev": {
-    "label": "Semana 7 (11 May - 17 May)",
-    "days": {
-      "lunes": {
         "checkin": true,
         "todolist": true,
         "summary": true,
@@ -88,52 +45,108 @@
         "todoreviewer": false
       },
       "miercoles": {
-        "checkin": false,
+        "checkin": true,
         "todolist": true,
         "summary": true,
         "todoreviewer": false
       },
       "jueves": {
-        "checkin": false,
+        "checkin": true,
         "todolist": true,
-        "summary": false,
+        "summary": true,
         "todoreviewer": false
       },
       "viernes": {
-        "checkin": false,
+        "checkin": true,
         "todolist": true,
-        "summary": false,
+        "summary": true,
         "todoreviewer": false
       },
       "sabado": {
-        "checkin": false,
+        "checkin": true,
         "todolist": true,
-        "summary": false,
+        "summary": true,
         "todoreviewer": false
       },
       "domingo": {
         "checkin": false,
-        "todolist": false,
+        "todolist": true,
         "summary": false,
         "todoreviewer": false
       }
     }
   },
-  "current_week": 8,
+  "current_week": 9,
   "today_tasks": {
-    "day": "miercoles",
-    "date": "2026-05-20",
+    "day": "lunes",
+    "date": "2026-05-25",
     "tasks": [
       {
-        "task": "[[Refactorización Pizarra]] - **Ideas Frescas = Mente Fresca**",
+        "task": "🔴 [[Estadística Aplicada - DD1]] — **ENTREGAR HOY** (deadline)",
         "done": false
       },
       {
-        "task": "[[Apps Moviles EP]] - Examen a las 8pm",
+        "task": "🟡 [[Aplicaciones Móviles]] — **Reunión práctica parcial 4-6pm** con amigos",
         "done": false
       },
       {
-        "task": "[[Klippr - Kotlin]] - Dependencias y arquitectura del proyecto con **ROOM**",
+        "task": "🟡 Preparar estructura de estudio para parciales (roadmap semanal)",
+        "done": false
+      },
+      {
+        "task": "Terminar lo que falte del informe",
+        "done": false
+      },
+      {
+        "task": "Coordinar con el grupo si es necesario",
+        "done": true
+      },
+      {
+        "task": "**ENTREGAR** ✅",
+        "done": false
+      },
+      {
+        "task": "**Reunión 4-6pm** — practicar con amigos",
+        "done": false
+      },
+      {
+        "task": "Identificar temas débiles para estudiar martes",
+        "done": false
+      },
+      {
+        "task": "Revisar material de Google Skills si aplica",
+        "done": false
+      },
+      {
+        "task": "Identificar cuántos microcursos faltan",
+        "done": false
+      },
+      {
+        "task": "Planear cuáles hacer esta semana (entre estudio de parciales)",
+        "done": false
+      },
+      {
+        "task": "Revisar estructura de microcursos/unidades",
+        "done": false
+      },
+      {
+        "task": "Planear roadmap para la semana",
+        "done": false
+      },
+      {
+        "task": "🚶 7000 pasos",
+        "done": false
+      },
+      {
+        "task": "💤 Dormir temprano — mañana martes es full estudio Apps Móviles",
+        "done": false
+      },
+      {
+        "task": "Marcar tareas completadas al final del día",
+        "done": false
+      },
+      {
+        "task": "Identificar temas débiles de Apps Móviles para estudiar martes",
         "done": false
       }
     ]
@@ -148,7 +161,7 @@
       "type": "🎯 En desarrollo"
     },
     "WeTech / LlamIA": {
-      "notes": 3,
+      "notes": 6,
       "type": "🌱 Semilla"
     }
   },
@@ -173,7 +186,7 @@
       "fecha": "2026-05-10",
       "tipo": "🔴 Entrega",
       "peso": "15%",
-      "dias_restantes": -10,
+      "dias_restantes": -15,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -183,7 +196,7 @@
       "fecha": "2026-05-11",
       "tipo": "📄 Avance",
       "peso": "—",
-      "dias_restantes": -9,
+      "dias_restantes": -14,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -193,7 +206,7 @@
       "fecha": "2026-05-17",
       "tipo": "📄 Trabajo",
       "peso": "5%",
-      "dias_restantes": -3,
+      "dias_restantes": -8,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -203,7 +216,7 @@
       "fecha": "2026-05-17",
       "tipo": "📄 Trabajo",
       "peso": "15%",
-      "dias_restantes": -3,
+      "dias_restantes": -8,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -213,9 +226,9 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "10%",
-      "dias_restantes": 4,
-      "status": "proximo",
-      "label": "🟡 En 4 días"
+      "dias_restantes": -1,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
     },
     {
       "curso": "Aplicaciones Móviles",
@@ -223,9 +236,9 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "15%",
-      "dias_restantes": 4,
-      "status": "proximo",
-      "label": "🟡 En 4 días"
+      "dias_restantes": -1,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
     },
     {
       "curso": "Cálculo II",
@@ -233,9 +246,9 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "25%",
-      "dias_restantes": 4,
-      "status": "proximo",
-      "label": "🟡 En 4 días"
+      "dias_restantes": -1,
+      "status": "vencido",
+      "label": "⚠️ ¡VENCIDO!"
     }
   ],
   "recent_activity": [],
