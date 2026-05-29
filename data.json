@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-05-25T09:02:09.105697",
-  "total_notes": 730,
+  "generated_at": "2026-05-29T08:00:40.821971",
+  "total_notes": 752,
   "notes_by_area": {
-    "2026": 697,
-    "Universidad": 24,
+    "2026": 717,
+    "Universidad": 26,
     "Excalidraw": 1,
     "(otros)": 8
   },
   "vault_structure": [
     {
       "name": "2026",
-      "notes": 697
+      "notes": 717
     },
     {
       "name": "Excalidraw",
@@ -22,12 +22,55 @@
     },
     {
       "name": "Universidad",
-      "notes": 24
+      "notes": 26
     }
   ],
   "weekly_progress_current": {
-    "label": "Semana 9",
-    "days": {}
+    "label": "Semana 9 (25 May - 31 May)",
+    "days": {
+      "lunes": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "martes": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "miercoles": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "jueves": {
+        "checkin": false,
+        "todolist": true,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "viernes": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "sabado": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      },
+      "domingo": {
+        "checkin": false,
+        "todolist": false,
+        "summary": false,
+        "todoreviewer": false
+      }
+    }
   },
   "weekly_progress_prev": {
     "label": "Semana 8 (18 May - 24 May)",
@@ -78,75 +121,111 @@
   },
   "current_week": 9,
   "today_tasks": {
-    "day": "lunes",
-    "date": "2026-05-25",
+    "day": "viernes",
+    "date": "2026-05-29",
     "tasks": [
       {
-        "task": "🔴 [[Estadística Aplicada - DD1]] — **ENTREGAR HOY** (deadline)",
-        "done": false
-      },
-      {
-        "task": "🟡 [[Aplicaciones Móviles]] — **Reunión práctica parcial 4-6pm** con amigos",
-        "done": false
-      },
-      {
-        "task": "🟡 Preparar estructura de estudio para parciales (roadmap semanal)",
-        "done": false
-      },
-      {
-        "task": "Terminar lo que falte del informe",
-        "done": false
-      },
-      {
-        "task": "Coordinar con el grupo si es necesario",
+        "task": "[[LlamIA]] — Validar US del grill + empezar primer build (después de SO blocks)",
         "done": true
       },
       {
-        "task": "**ENTREGAR** ✅",
+        "task": "[[Cálculo II]] — Subir material de estudio a **NotebookLM**",
         "done": false
       },
       {
-        "task": "**Reunión 4-6pm** — practicar con amigos",
+        "task": "[[Electivo Python]] — Avanzar microcurso/unidad (noche o después de SO)",
+        "done": true
+      },
+      {
+        "task": "**Bloque mañana (9am-1pm):** estudio SO intensivo — temas del parcial",
+        "done": true
+      },
+      {
+        "task": "**Bloque tarde (1-5pm):** estudio SO profundo — ultimos repasos",
+        "done": true
+      },
+      {
+        "task": "Preparar logística: hora de salida, llevar lo necesario, confirmar hora y lugar",
+        "done": true
+      },
+      {
+        "task": "Cerrar estudio fuerte a las **5pm** — no quemarse antes del examen",
+        "done": true
+      },
+      {
+        "task": "Google Skills — microcursos SO si refuerzan",
+        "done": true
+      },
+      {
+        "task": "Reunir material de estudio de Cálculo (PDFs, apuntes, PPTs)",
+        "done": true
+      },
+      {
+        "task": "Subir a NotebookLM",
         "done": false
       },
       {
-        "task": "Identificar temas débiles para estudiar martes",
+        "task": "Probar: generar resumen o preguntas de práctica desde el material",
         "done": false
       },
       {
-        "task": "Revisar material de Google Skills si aplica",
+        "task": "Avanzar 1 microcurso/unidad (noche, después de bloques SO)",
+        "done": true
+      },
+      {
+        "task": "Si estás muy cargado: moverlo sin culpa a domingo",
+        "done": true
+      },
+      {
+        "task": "Leer y responder el **GRILL-ME-PRE-CODIGO.md** (es la validación de US)",
+        "done": true
+      },
+      {
+        "task": "Definir: ¿cuál es la \"una cosa\" que construyes primero? (input + caso clínico)",
+        "done": true
+      },
+      {
+        "task": "Configurar proyecto Next.js + Supabase local",
+        "done": true
+      },
+      {
+        "task": "Opcional — boceto del backend: API route para generar caso clínico con OpenAI",
+        "done": true
+      },
+      {
+        "task": "**Regla:** solo DESPUÉS de completar los bloques de SO del día",
+        "done": true
+      },
+      {
+        "task": "[[Guardar Material de estudio de Cálculo]] - Carpeta en Drive (si aplica)",
         "done": false
       },
       {
-        "task": "Identificar cuántos microcursos faltan",
+        "task": "**NO quemarse hoy** — mañana es el parcial real",
+        "done": true
+      },
+      {
+        "task": "Dormir temprano (11pm máximo)",
+        "done": true
+      },
+      {
+        "task": "Comer bien antes del examen de mañana",
+        "done": true
+      },
+      {
+        "task": "Tener todo listo para mañana (lonche, documentos, agua)",
+        "done": true
+      },
+      {
+        "task": "Check-in: ¿cómo fue el estudio de SO hoy? ¿quedaron dudas?",
         "done": false
       },
       {
-        "task": "Planear cuáles hacer esta semana (entre estudio de parciales)",
+        "task": "Logística para mañana confirmada: hora, lugar, materiales",
         "done": false
       },
       {
-        "task": "Revisar estructura de microcursos/unidades",
-        "done": false
-      },
-      {
-        "task": "Planear roadmap para la semana",
-        "done": false
-      },
-      {
-        "task": "🚶 7000 pasos",
-        "done": false
-      },
-      {
-        "task": "💤 Dormir temprano — mañana martes es full estudio Apps Móviles",
-        "done": false
-      },
-      {
-        "task": "Marcar tareas completadas al final del día",
-        "done": false
-      },
-      {
-        "task": "Identificar temas débiles de Apps Móviles para estudiar martes",
+        "task": "¿Qué aprendí del grill de LlamIA?",
         "done": false
       }
     ]
@@ -161,7 +240,7 @@
       "type": "🎯 En desarrollo"
     },
     "WeTech / LlamIA": {
-      "notes": 6,
+      "notes": 7,
       "type": "🌱 Semilla"
     }
   },
@@ -186,7 +265,7 @@
       "fecha": "2026-05-10",
       "tipo": "🔴 Entrega",
       "peso": "15%",
-      "dias_restantes": -15,
+      "dias_restantes": -19,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -196,7 +275,7 @@
       "fecha": "2026-05-11",
       "tipo": "📄 Avance",
       "peso": "—",
-      "dias_restantes": -14,
+      "dias_restantes": -18,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -206,7 +285,7 @@
       "fecha": "2026-05-17",
       "tipo": "📄 Trabajo",
       "peso": "5%",
-      "dias_restantes": -8,
+      "dias_restantes": -12,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -216,7 +295,7 @@
       "fecha": "2026-05-17",
       "tipo": "📄 Trabajo",
       "peso": "15%",
-      "dias_restantes": -8,
+      "dias_restantes": -12,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -226,7 +305,7 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "10%",
-      "dias_restantes": -1,
+      "dias_restantes": -5,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -236,7 +315,7 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "15%",
-      "dias_restantes": -1,
+      "dias_restantes": -5,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     },
@@ -246,7 +325,7 @@
       "fecha": "2026-05-24",
       "tipo": "📝 Examen",
       "peso": "25%",
-      "dias_restantes": -1,
+      "dias_restantes": -5,
       "status": "vencido",
       "label": "⚠️ ¡VENCIDO!"
     }
